@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Midas.Controllers
 {
     [Route("api/[Controller]")]
-    public class TickersController : Controller
+    public class TickersController : ControllerBase
     {
         private readonly ITickerRepository repository;
         private readonly ILogger<TickersController> logger;
@@ -19,9 +19,18 @@ namespace Midas.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Ticker> Get()
+        public ActionResult<IEnumerable<Ticker>> Get()
         {
-            return repository.GetTestTickers(50);
+            try
+            {
+                return repository.GetTestTickers(50);
+            }
+            catch (System.Exception ex)
+            {
+
+                logger.LogError($"Failed to get tickers: {ex}");
+                return BadRequest("Failed to get tickers");
+            }
         }
     }
 }
