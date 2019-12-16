@@ -11,24 +11,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Midas.Data.Extensions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Midas
+namespace Midas.Services
 {
     public class MidasSeeder
     {
         private readonly MidasContext _ctx;
         private readonly IWebHostEnvironment _hosting;
         private readonly UserManager<MidasUser> _userManager;
-        private readonly IMidasRepository _repository;
+        private readonly IDayRepository _dayRepository;
+        private readonly ITickerRepository _tickerRepo;
+        private readonly IEodRepository _eodRepo;
 
-        public MidasSeeder(MidasContext ctx, IWebHostEnvironment hosting, UserManager<MidasUser> userManager, IMidasRepository repository)
+        public MidasSeeder(MidasContext ctx, IWebHostEnvironment hosting, UserManager<MidasUser> userManager, IDayRepository dayRepository, ITickerRepository tickerRepo, IEodRepository EodRepo)
         {
             _ctx = ctx;
             _hosting = hosting;
             _userManager = userManager;
-            _repository = repository;
+            _dayRepository = dayRepository;
+            _tickerRepo = tickerRepo;
+            _eodRepo = EodRepo;
         }
 
         public static void RunSeeding(IHost host)
@@ -39,17 +44,20 @@ namespace Midas
                 var seeder = scope.ServiceProvider.GetService<MidasSeeder>();
 
                 // TIINGO TICKER SEED
-                //DownloadService.downloadSupportedTickerTiingo();
-                //seeder.SeedTiingoTickers();
+                DownloadService.downloadSupportedTickerTiingo();
+                seeder.SeedTiingoTickers();
+
+                // SEED DAYS
+                seeder.SeedDays();
+
+                // TEST AAPL EOD SEED
+                //seeder.SeedAaplEod();
+
+                // SEED OPTIONS CYCLES
+                //seeder.SeedOptionCycles();
 
                 // IEX TICKER SEED
                 //seeder.SeedIexTickers().Wait();
-
-                // YAHOO TICKER SEED
-                //seeder.SeedYahooTickers();
-
-                // SEED DAYS
-                //seeder.SeedDays();
 
                 // TIINGO - END OF DAY
                 //seeder.SeedTiingoEndOfDays(5).Wait();
@@ -60,58 +68,43 @@ namespace Midas
                 // YAHOO - END OF DAY
                 //seeder.YahooGetPreviousDayEOD().Wait();
 
-                // SEED COMPANY INFO
-                seeder.SeedCompanyInfo();
-
             }
         }
 
-        private void SeedCompanyInfo()
+        private void SeedAaplEod()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SeedOptionCycles()
         {
             _ctx.Database.EnsureCreated();
 
-            var tickerList = _repository.GetAllTickers(100);
-            var companyList = new List<Company>();
+            var monthsBack = 12;
 
-            foreach (var ticker in tickerList)
+            var daysList = _dayRepository.GetAllDays();
+
+            foreach (var day in daysList)
             {
-                var requestString = $"{ApiTokens.iex_live_domain}{ApiTokens.iex_company_p1}{ticker.ticker}{ApiTokens.iex_company_p2}{ApiTokens.live_iex_public_token}";
-
-                var settings = new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore
-                };
-
-                using (WebClient webClient = new WebClient())
-                {
-
-                    var json = webClient.DownloadString(requestString);
-
-                    if (json == "Unknown symbol")
-                    {
-                        break;
-                    }
-                    var company = JsonConvert.DeserializeObject<Company>(json, settings);
-
-                    if (ticker.TiingoBool == true)
-                    {
-                        company.tiingoTickerId = ticker.id;
-                    }
-                    else if (ticker.IexBool == true)
-                    {
-                        company.iexTickerId = ticker.id;
-                    }
-
-                    companyList.Add(company);
-                }
-
+                _dayRepository.CreateOptionCycleOpens(day, monthsBack);
             }
-
-            _ctx.Companys.AddRange(companyList);
-            _ctx.SaveChanges();
         }
 
+        private void SeedDays()
+        {
+            _ctx.Database.EnsureCreated();
+
+            var daysBack = 0;
+
+            if (DevelopmentEnvironment.getEnvironment()){daysBack = 365;}else{daysBack = 3650;}
+
+            var daysList = Day.DaysBack(daysBack);
+
+            foreach (var day in daysList)
+            {
+                _dayRepository.CreateNewDay(day.Date);
+            }
+        }
 
         // YAHOO - START
 
@@ -121,7 +114,7 @@ namespace Midas
             _ctx.Database.EnsureCreated();
 
             // TICKER LIST
-            var tickerList = _repository.GetTickersIex(10);
+            var tickerList = _tickerRepo.GetTickersIex(10);
 
             foreach (var ticker in tickerList)
             {
@@ -133,24 +126,24 @@ namespace Midas
                     {
 
                         var json = webClient.DownloadString(requestString);
-                        var yahooJson = JsonConvert.DeserializeObject<IexTicker>(json);
+                        //var yahooJson = JsonConvert.DeserializeObject<IexTicker>(json);
 
-                        var indicators = yahooJson.Chart.Result[0].Indicators.Quote[0];
-                        var indicatorsAdj = yahooJson.Chart.Result[0].Indicators.Adjclose[0];
+                        //var indicators = yahooJson.Chart.Result[0].Indicators.Quote[0];
+                        //var indicatorsAdj = yahooJson.Chart.Result[0].Indicators.Adjclose[0];
 
                         var YahooEOD = new EOD();
-                        YahooEOD.Open = indicators.Open[0];
-                        YahooEOD.High = indicators.High[0];
-                        YahooEOD.Low = indicators.Low[0];
-                        YahooEOD.Close = indicators.Close[0];
-                        YahooEOD.AdjClose = indicatorsAdj.AdjcloseAdjclose[0];
-                        YahooEOD.Volume = indicators.Volume[0];
+                        //YahooEOD.Open = indicators.Open[0];
+                        //YahooEOD.High = indicators.High[0];
+                        //YahooEOD.Low = indicators.Low[0];
+                        //YahooEOD.Close = indicators.Close[0];
+                        //YahooEOD.AdjClose = indicatorsAdj.AdjcloseAdjclose[0];
+                        //YahooEOD.Volume = indicators.Volume[0];
                         YahooEOD.YahooBool = true;
 
                         // DAY
-                        var Day = _repository.GetDayByDate(DateTime.Today);
-                        YahooEOD.dayId = Day.id;
-                        YahooEOD.tickerId = ticker.id;
+                        var Day = _dayRepository.GetDayByDate(DateTime.Today);
+                        YahooEOD.DayId = Day.id;
+                        YahooEOD.TickerId = ticker.id;
 
                         _ctx.EODs.Add(YahooEOD);
                         _ctx.SaveChanges();
@@ -201,18 +194,17 @@ namespace Midas
             _ctx.Database.EnsureCreated();
 
             // DAYS LIST
-            var yesterday = DateTime.Today.AddDays(-1);
-            var daysList = _repository.DaysBack(yesterday.AddDays(-daysBack));
+            var daysList = Day.DaysBack(180);
 
             // TICKER LIST
-            var tickerList = _repository.GetTickersTiingo(10);
+            var tickerList = _tickerRepo.GetTickersTiingo(10);
 
             foreach (var ticker in tickerList)
             {
 
                 foreach (var day in daysList)
                 {
-                    var EodItem = _repository.GetTiingoEODByTickerId(ticker.id, day.id);
+                    var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
 
                     if (EodItem.AdjOpen != 0)
                     {
@@ -232,8 +224,8 @@ namespace Midas
                                 {
                                     var emptyEod = new EOD();
                                     emptyEod.IexBool = true;
-                                    emptyEod.tickerId = ticker.id;
-                                    emptyEod.dayId = day.id;
+                                    emptyEod.TickerId = ticker.id;
+                                    emptyEod.DayId = day.id;
                                     emptyEod.Open = 0.00;
                                     emptyEod.High = 0.00;
                                     emptyEod.Low = 0.00;
@@ -247,8 +239,8 @@ namespace Midas
                                 {
                                     foreach (var item in eodList)
                                     {
-                                        item.tickerId = ticker.id;
-                                        item.dayId = day.id;
+                                        item.TickerId = ticker.id;
+                                        item.DayId = day.id;
                                         item.IexBool = true;
 
                                         _ctx.EODs.Add(item);
@@ -276,18 +268,17 @@ namespace Midas
             _ctx.Database.EnsureCreated();
 
             // DAYS LIST
-            var yesterday = DateTime.Today.AddDays(-1);
-            var daysList = _repository.DaysBack(yesterday.AddDays(-daysBack));
+            var daysList = Day.DaysBack(180);
 
             // TICKER LIST
-            var tickerList = _repository.GetTickersTiingo(10);
+            var tickerList = _tickerRepo.GetTickersTiingo(10);
 
             foreach (var ticker in tickerList)
             {
 
                 foreach (var day in daysList)
                 {
-                    var EodItem = _repository.GetTiingoEODByTickerId(ticker.id, day.id);
+                    var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
 
                     if (EodItem == null)
                     {
@@ -309,8 +300,8 @@ namespace Midas
                                 {
                                     var emptyEod = new EOD();
                                     emptyEod.TiingoBool = true;
-                                    emptyEod.tickerId = ticker.id;
-                                    emptyEod.dayId = day.id;
+                                    emptyEod.TickerId = ticker.id;
+                                    emptyEod.DayId = day.id;
                                     emptyEod.Open = 0.00;
                                     emptyEod.High = 0.00;
                                     emptyEod.Low = 0.00;
@@ -324,8 +315,8 @@ namespace Midas
                                 {
                                     foreach (var item in eodList)
                                     {
-                                        item.tickerId = ticker.id;
-                                        item.dayId = day.id;
+                                        item.TickerId = ticker.id;
+                                        item.DayId = day.id;
                                         item.TiingoBool = true;
 
                                         _ctx.EODs.Add(item);
@@ -349,15 +340,10 @@ namespace Midas
         public void SeedTiingoTickers()
         {
             DateTime creation = File.GetCreationTime("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-            var tiingoRepositoryList = _repository.GetTickersTiingo(0);
 
-            if (creation.Date != DateTime.Today || !tiingoRepositoryList.Any())
+            if (creation.Date != DateTime.Today && !_ctx.Tickers.Any())
             {
                 _ctx.Database.EnsureCreated();
-
-                var filePath = Path.Combine(_hosting.ContentRootPath, "Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-
-                var csv = File.ReadAllText(filePath);
 
                 var config = new CsvHelper.Configuration.Configuration
                 {
@@ -387,42 +373,5 @@ namespace Midas
         }
         // TIINGO - END
 
-        public void SeedDays()
-        {
-            _ctx.Database.EnsureCreated();
-
-            if (!_ctx.Days.Any())
-            {
-                var days = Day.DaysBack(730);
-
-                _ctx.Days.AddRange(days);
-                _ctx.SaveChanges();
-            }
-        }
-
-        //public async Task SeedAsync()
-        //{
-        //    _ctx.Database.EnsureCreated();
-
-        //    // Seed the Main User
-        //    MidasUser user = await _userManager.FindByEmailAsync("elistevens32@gmail.com");
-        //    if (user == null)
-        //    {
-        //        user = new MidasUser()
-        //        {
-        //            LastName = "Stevens",
-        //            FirstName = "Eli",
-        //            Email = "elistevens32@gmail.com",
-        //            UserName = "elistevens32@gmail.com"
-        //        };
-
-        //        var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
-        //        if (result != IdentityResult.Success)
-        //        {
-        //            throw new InvalidOperationException("Could not create user in Seeding");
-        //        }
-        //    }
-
-        //}
     }
 }

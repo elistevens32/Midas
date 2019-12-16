@@ -15,6 +15,7 @@ namespace Midas.Data.Entities
         public int id { get; set; }
         public int tiingoTickerId { get; set; }
         public int iexTickerId { get; set; }
+        public int yahooTickerId { get; set; }
 
         [JsonProperty("symbol")]
         public string Symbol { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Midas
 {
-    public class MidasContext : IdentityDbContext<MidasUser>
+    public class MidasContext : DbContext
     {
         public MidasContext(DbContextOptions<MidasContext> options) : base(options)
         {
@@ -19,8 +19,8 @@ namespace Midas
         public DbSet<EOD> EODs { get; set; }
 
         public DbSet<Day> Days { get; set; }
+        public DbSet<OptionCycleDate> OptionCycleDates { get; set; }
         public DbSet<Company> Companys { get; set; }
-
 
         // NESTED OBJECTS
 

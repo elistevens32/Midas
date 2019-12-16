@@ -18,6 +18,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
+using Midas.Services;
+using Midas.Data;
 
 namespace Midas
 {
@@ -60,9 +62,15 @@ namespace Midas
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
+            // SEEDERS
             services.AddTransient<MidasSeeder>();
+            services.AddTransient<TestDataSeeder>();
 
+            // REPOSITORIES
             services.AddScoped<IMidasRepository, MidasRepository>();
+            services.AddScoped<IDayRepository, DayRepository>();
+            services.AddScoped<ITickerRepository, TickerRepository>();
+            services.AddScoped<IEodRepository, EodRepository>();
 
             services.AddRazorPages();
 

@@ -12,13 +12,14 @@ namespace Midas.Data.Entities
         [Key]
         public int id { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
 
         public int day { get; set; }
         public int month { get; set; }
         public int year { get; set; }
 
         public int deleted { get; set; }
+
 
         public static List<Day> DaysBack(int daysBack)
         {
@@ -37,6 +38,7 @@ namespace Midas.Data.Entities
                 dayObj.year = thru.Year;
 
                 days.Add(dayObj);
+
             }
 
             return days;

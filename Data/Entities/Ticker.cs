@@ -14,12 +14,12 @@ namespace Midas.Data.Entities
         // GENERAL
         [Key]
         public int id { get; set; }
-        public int companyId { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
         public DateTime Date { get; set; }
 
         [JsonProperty("symbol")]
         public string ticker { get; set; }
-        public string name { get; set; }
         public bool TiingoBool { get; set; }
         public bool IexBool { get; set; }
         public bool YahooBool { get; set; }

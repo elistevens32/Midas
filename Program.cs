@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Midas.Data;
+using Midas.Services;
 
 namespace Midas
 {
@@ -15,8 +17,14 @@ namespace Midas
         {
             var host = CreateHostBuilder(args).Build();
 
-            // SEEDING DATA
-            MidasSeeder.RunSeeding(host);
+            if (DevelopmentEnvironment.testEnvironment == true)
+            {
+                // SEEDING DATA
+                MidasSeeder.RunSeeding(host);
+
+                // TEST DATA
+                //TestDataSeeder.SeedTestData(host);
+            }
 
             host.Run();
         }

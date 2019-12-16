@@ -25,84 +25,22 @@ namespace Midas
             _ctx.Add(model);
         }
 
-
-        // DAY - START
-        public List<Day> DaysBack(DateTime DateBack)
+        public void CreateCompany(Company Company)
         {
-            return _ctx.Days
-                    .Where(d => d.Date > DateBack.Date)
-                    .ToList();
-        }
+            var companyCheck = _ctx.Companys
+                .Where(c => (c.CompanyName == Company.CompanyName) &&
+                (c.Symbol == Company.Symbol))
+                .FirstOrDefault();
 
-        public Day GetDayByDate(DateTime date)
-        {
-            var dateCheck = date.Date;
+            if (companyCheck == null)
+            {
+                var companyObj = Company;
 
-            return _ctx.Days
-                           .Where(d => d.Date == dateCheck)
-                           .FirstOrDefault();
+                _ctx.Companys.Add(companyObj);
+                _ctx.SaveChanges();
+            }
+            
         }
-        // DAY - END
-
-        // TICKER - START
-        public List<Ticker> GetAllTickers(int tickerCount)
-        {
-            if (tickerCount == 0)
-            {
-                return _ctx.Tickers
-                    .Where(t => t.ticker != null)
-                    .ToList();
-            }
-            else
-            {
-                return _ctx.Tickers
-                    .Where(t => t.ticker != null)
-                    .Take(tickerCount)
-                    .ToList();
-            }
-        }
-        public List<Ticker> GetTickersIex(int number)
-        {
-            if (number == 0)
-            {
-                return _ctx.Tickers
-                           .Where(t => t.IexBool == true)
-                           .ToList();
-            }
-            else
-            {
-                return _ctx.Tickers
-                           .Where(t => t.IexBool == true)
-                           .Take(number)
-                           .ToList();
-            }
-        }
-        public List<Ticker> GetTickersTiingo(int number)
-        {
-            if (number == 0)
-            {
-                return _ctx.Tickers
-                           .Where(t => t.TiingoBool == true)
-                           .ToList();
-            }
-            else
-            {
-                return _ctx.Tickers
-                           .Where(t => t.TiingoBool == true)
-                           .Take(number)
-                           .ToList();
-            }
-        }
-
-        public EOD GetTiingoEODByTickerId(int tickerId, int dayId)
-        {
-            return _ctx.EODs
-                           .Where(e => (e.tickerId == tickerId) &&
-                           (e.dayId == dayId))
-                           .FirstOrDefault();
-        }
-
-
 
 
 

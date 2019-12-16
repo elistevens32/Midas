@@ -2,21 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Midas.Data.Entities
 {
+
     public class EOD
     {
+
+        public const string tiingo_source = "tiingo";
+        public const string iex_source = "iex";
+        public const string yahoo_source = "yahoo";
+        public const string test_source = "test";
+
         // GENERAL
         [Key]
         public int id { get; set; }
-        public int dayId { get; set; }
-        public int tickerId { get; set; }
+
+        public int DayId { get; set; }
         public Day Day { get; set; }
+
+        public int TickerId { get; set; }
         public Ticker Ticker { get; set; }
+
         public bool TiingoBool { get; set; }
         public bool IexBool { get; set; }
         public bool YahooBool { get; set; }
@@ -61,11 +72,6 @@ namespace Midas.Data.Entities
 
         [JsonProperty("splitFactor")]
         public double SplitFactor { get; set; }
-
-
-        // IEX
-
-        // YAHOO
 
     }
 }
