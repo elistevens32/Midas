@@ -13,6 +13,13 @@ let DataService = class DataService {
             return true;
         }));
     }
+    getTicker(id) {
+        return this.http.get("/api/tickers/" + id)
+            .pipe(map((data) => {
+            this.ticker = data;
+            return true;
+        }));
+    }
 };
 DataService = __decorate([
     Injectable()

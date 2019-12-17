@@ -74,6 +74,8 @@ namespace Midas
 
             services.AddRazorPages();
 
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,11 +99,11 @@ namespace Midas
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(cfg =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                cfg.MapControllerRoute("Default",
+                      "{controller}/{action}/{id?}",
+                      new { controller = "Dashboard", Action = "Index" });
             });
 
         }

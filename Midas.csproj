@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\app\profile\profile.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\settings\settings.component.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\DataService.ts" />
     <TypeScriptCompile Remove="ClientApp\app\ticker-list\ticker-list.component.ts" />
   </ItemGroup>

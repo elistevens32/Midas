@@ -87,6 +87,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "./node_modules/ngx-bootstrap/dropdown/fesm2015/ngx-bootstrap-dropdown.js");
 /* harmony import */ var _ticker_list_ticker_list_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./ticker-list/ticker-list.component */ "./ClientApp/app/ticker-list/ticker-list.component.ts");
 /* harmony import */ var _shared_DataService__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./shared/DataService */ "./ClientApp/app/shared/DataService.ts");
+/* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./settings/settings.component */ "./ClientApp/app/settings/settings.component.ts");
+/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./profile/profile.component */ "./ClientApp/app/profile/profile.component.ts");
+
+
 
 
 
@@ -129,6 +133,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_14__["DashboardComponent"],
             _sidebar_nav_sidebar_nav__WEBPACK_IMPORTED_MODULE_11__["SideBarNav"],
             _ticker_list_ticker_list_component__WEBPACK_IMPORTED_MODULE_22__["TickerListComponent"],
+            _settings_settings_component__WEBPACK_IMPORTED_MODULE_24__["SettingsComponent"],
+            _profile_profile_component__WEBPACK_IMPORTED_MODULE_25__["ProfileComponent"],
             _fetch_data_fetch_data_component__WEBPACK_IMPORTED_MODULE_9__["FetchDataComponent"]
         ],
         imports: [
@@ -450,6 +456,36 @@ NavMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./ClientApp/app/profile/profile.component.ts":
+/*!****************************************************!*\
+  !*** ./ClientApp/app/profile/profile.component.ts ***!
+  \****************************************************/
+/*! exports provided: ProfileComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let ProfileComponent = class ProfileComponent {
+    constructor() {
+        this.title = 'Profile';
+    }
+};
+ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'profile',
+        template: __webpack_require__(/*! raw-loader!./profile.component.html */ "./node_modules/raw-loader/index.js!./ClientApp/app/profile/profile.component.html")
+    })
+], ProfileComponent);
+
+
+
+/***/ }),
+
 /***/ "./ClientApp/app/route.ts":
 /*!********************************!*\
   !*** ./ClientApp/app/route.ts ***!
@@ -460,17 +496,53 @@ NavMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appRoutes", function() { return appRoutes; });
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login/login.component */ "./ClientApp/app/login/login.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home/home.component */ "./ClientApp/app/home/home.component.ts");
-/* harmony import */ var _ticker_ticker_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ticker/ticker.component */ "./ClientApp/app/ticker/ticker.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home/home.component */ "./ClientApp/app/home/home.component.ts");
+/* harmony import */ var _ticker_ticker_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ticker/ticker.component */ "./ClientApp/app/ticker/ticker.component.ts");
+/* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settings/settings.component */ "./ClientApp/app/settings/settings.component.ts");
+/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./profile/profile.component */ "./ClientApp/app/profile/profile.component.ts");
+/* harmony import */ var _ticker_list_ticker_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ticker-list/ticker-list.component */ "./ClientApp/app/ticker-list/ticker-list.component.ts");
+
+
 
 
 
 const appRoutes = [
-    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_0__["LoginComponent"] },
-    { path: 'stock', component: _ticker_ticker_component__WEBPACK_IMPORTED_MODULE_2__["TickerComponent"] },
-    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_1__["HomeComponent"] },
+    { path: 'dashboard/ticker/:id', component: _ticker_ticker_component__WEBPACK_IMPORTED_MODULE_1__["TickerComponent"] },
+    { path: 'dashboard/tickerlist', component: _ticker_list_ticker_list_component__WEBPACK_IMPORTED_MODULE_4__["TickerListComponent"] },
+    { path: 'dashboard/settings', component: _settings_settings_component__WEBPACK_IMPORTED_MODULE_2__["SettingsComponent"] },
+    { path: 'dashboard/profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_3__["ProfileComponent"] },
+    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_0__["HomeComponent"] },
 ];
+
+
+/***/ }),
+
+/***/ "./ClientApp/app/settings/settings.component.ts":
+/*!******************************************************!*\
+  !*** ./ClientApp/app/settings/settings.component.ts ***!
+  \******************************************************/
+/*! exports provided: SettingsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsComponent", function() { return SettingsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let SettingsComponent = class SettingsComponent {
+    constructor() {
+        this.title = 'Settings';
+    }
+};
+SettingsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'settings',
+        template: __webpack_require__(/*! raw-loader!./settings.component.html */ "./node_modules/raw-loader/index.js!./ClientApp/app/settings/settings.component.html")
+    })
+], SettingsComponent);
+
 
 
 /***/ }),
@@ -502,6 +574,13 @@ let DataService = class DataService {
         return this.http.get("/api/tickers")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((data) => {
             this.tickers = data;
+            return true;
+        }));
+    }
+    getTicker(id) {
+        return this.http.get("/api/tickers/" + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((data) => {
+            this.ticker = data;
             return true;
         }));
     }
@@ -612,10 +691,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TickerComponent", function() { return TickerComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _shared_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/DataService */ "./ClientApp/app/shared/DataService.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 let TickerComponent = class TickerComponent {
+    constructor(data, route) {
+        this.data = data;
+        this.route = route;
+        this.title = 'Ticker';
+        this.companyExists = false;
+    }
+    ngOnInit() {
+        this.route.params
+            .subscribe((params) => {
+            this.id = +params['id'];
+        });
+        this.data.getTicker(this.id)
+            .subscribe(success => {
+            if (success) {
+                this.ticker = this.data.ticker;
+                if (this.data.ticker.company.companyName !== null) {
+                    this.companyExists = true;
+                }
+            }
+        });
+    }
 };
+TickerComponent.ctorParameters = () => [
+    { type: _shared_DataService__WEBPACK_IMPORTED_MODULE_2__["DataService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+];
 TickerComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'ticker',
@@ -759,7 +867,7 @@ module.exports = "<h1>Counter</h1>\r\n\r\n<p>This is a simple example of an Angu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n  <div class=\"pb-2 mb-3 border-bottom\">\r\n    <h2 class=\"h2\">Dashboard</h2>\r\n    <breadcrumb></breadcrumb>\r\n  </div>\r\n    <ticker-list></ticker-list>\r\n  <!--<stock-list-widget></stock-list-widget>-->\r\n</main>\r\n"
+module.exports = "<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n    <div class=\"pb-2 mb-3 border-bottom\">\r\n        <h2 class=\"h2\">Dashboard</h2>\r\n        <breadcrumb></breadcrumb>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-4\">\r\n            <stock-list-widget></stock-list-widget>\r\n        </div>\r\n    </div>\r\n\r\n</main>\r\n"
 
 /***/ }),
 
@@ -770,7 +878,7 @@ module.exports = "<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default\">\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <h5>Overview</h5>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <time-export></time-export>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n\r\n    <div class=\"table-responsive\">\r\n      <table class=\"table table-hover table-striped table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Quality Score</th>\r\n            <th>Name</th>\r\n            <th>Symbol</th>\r\n            <th>Open</th>\r\n            <th>High</th>\r\n            <th>Low</th>\r\n            <th>Close</th>\r\n            <th>Volume</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-success\">1.82</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-danger\">.52</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n          <tr>\r\n            <td><span class=\"badge badge-warning\">.91</span></td>\r\n            <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n            <td>AAPL</td>\r\n            <td>275.98</td>\r\n            <td>289.12</td>\r\n            <td>215.95</td>\r\n            <td>237.02</td>\r\n            <td>2,073,943</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"panel panel-default\">\r\n  <div class=\"panel-heading\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <h5>Overview</h5>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n\r\n    <div class=\"table-responsive\">\r\n      <table class=\"table table-hover table-striped table-sm\">\r\n        <thead>\r\n          <tr>\r\n            <th>Quality Score</th>\r\n            <th>Name</th>\r\n            <th>Symbol</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n            <tr>\r\n                <td><span class=\"badge badge-success\">1.82</span></td>\r\n                <td><a class=\"font-weight-bold\" href=\"stock\">Apple Inc.</a></td>\r\n                <td>AAPL</td>\r\n            </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -825,7 +933,29 @@ module.exports = "<div class=\"main-bg\">\r\n  <div class=\"bg-general\">\r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0\">\r\n  <a class=\"navbar-brand col-sm-3 col-md-2 mr-0\" href=\"#\">MIDAS</a>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <!--Notifications Here-->\r\n    </div>\r\n    <div class=\"col-lg-12\">\r\n\r\n      <div class=\"dropdown\">\r\n        <a class=\"btn btn-light btn-sm dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n          Dropdown link\r\n        </a>\r\n\r\n        <div class=\"dropdown-menu\">\r\n          <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n        </div>\r\n      </div>\r\n     \r\n    </div>\r\n  </div>\r\n\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0\">\r\n  <a class=\"navbar-brand col-sm-3 col-md-2 mr-0\" href=\"#\">MIDAS</a>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <!--Notifications Here-->\r\n    </div>\r\n    <div class=\"col-lg-12\">\r\n\r\n      <div class=\"dropdown\">\r\n        <a class=\"btn btn-light btn-sm dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n          \r\n        </a>\r\n\r\n        <div class=\"dropdown-menu\">\r\n          <a class=\"dropdown-item\" href=\"dashboard/settings\">Settings</a>\r\n          <a class=\"dropdown-item\" href=\"dashboard/profile\">Profile</a>\r\n            <hr/>\r\n          <a class=\"dropdown-item\" href=\"#\">Logout</a>\r\n        </div>\r\n      </div>\r\n     \r\n    </div>\r\n  </div>\r\n\r\n</nav>\r\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./ClientApp/app/profile/profile.component.html":
+/*!********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./ClientApp/app/profile/profile.component.html ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Profile</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n            <!--TODO INSERT PROFILE-->\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./ClientApp/app/settings/settings.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./ClientApp/app/settings/settings.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Settings</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n            <!--TODO INSERT SETTINGS-->\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -836,7 +966,7 @@ module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-now
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"col-md-2 d-none d-md-block bg-light sidebar\">\r\n  <div class=\"sidebar-sticky\">\r\n    <br />\r\n    <ul class=\"nav flex-column\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link active\" href=\"#\">\r\n          <fa-icon [icon]=\"faTachometerAlt\"></fa-icon> Dashboard <span class=\"sr-only\">(current)</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">\r\n          <fa-icon [icon]=\"faList\"></fa-icon> Stock List\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">\r\n          <fa-icon [icon]=\"faCogs\"></fa-icon> Settings\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">\r\n          <fa-icon [icon]=\"faUser\"></fa-icon> Profile\r\n        </a>\r\n      </li>\r\n      <hr />\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"/login\">\r\n          <span data-feather=\"file\"></span>\r\n          Login\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"col-md-2 d-none d-md-block bg-light sidebar\">\r\n  <div class=\"sidebar-sticky\">\r\n    <br />\r\n    <ul class=\"nav flex-column\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link active\" href=\"\">\r\n          <fa-icon [icon]=\"faTachometerAlt\"></fa-icon> Dashboard <span class=\"sr-only\">(current)</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"dashboard/tickerlist\">\r\n          <fa-icon [icon]=\"faList\"></fa-icon> Ticker List\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"dashboard/settings\">\r\n          <fa-icon [icon]=\"faCogs\"></fa-icon> Settings\r\n        </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"dashboard/profile\">\r\n          <fa-icon [icon]=\"faUser\"></fa-icon> Profile\r\n        </a>\r\n      </li>\r\n      <hr />\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"Account/Login\">\r\n          <span data-feather=\"file\"></span>\r\n          Login\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -847,7 +977,7 @@ module.exports = "<nav class=\"col-md-2 d-none d-md-block bg-light sidebar\">\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n                <h5>{{title}}</h5>\r\n            </div>\r\n            <div class=\"col-md-6\">\r\n                <time-export></time-export>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-striped table-sm\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>ID</th>\r\n                        <th>Ticker</th>\r\n                        <th>Price Currency</th>\r\n                        <th>Exchange</th>\r\n\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let t of tickers\">\r\n                        <td>{{t.id}}</td>\r\n                        <td><span class=\"badge badge-success\">{{t.ticker}}</span></td>\r\n                        <td>{{t.priceCurrency}}</td>\r\n                        <td>{{t.exchange}}</td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n"
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Ticker List</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <time-export></time-export>\r\n        <br/>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-striped table-sm\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>ID</th>\r\n                        <th>Ticker</th>\r\n                        <th>Price Currency</th>\r\n                        <th>Exchange</th>\r\n\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let t of tickers\" >\r\n                        <td>{{t.id}}</td>\r\n                        <td><a href=\"dashboard/ticker/{{t.id}}\"><span class=\"badge badge-success\">{{t.ticker}}</span></a></td>\r\n                        <td>{{t.priceCurrency}}</td>\r\n                        <td>{{t.exchange}}</td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -858,7 +988,7 @@ module.exports = "<div class=\"panel panel-default\">\r\n    <div class=\"panel-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n  <sidebar-nav></sidebar-nav>\r\n  <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n    <div class=\"pb-2 mb-3 border-bottom\">\r\n      <h1>Apple Inc.</h1>\r\n      <h5>(AAPL)</h5>\r\n      <br/>\r\n      <breadcrumb></breadcrumb>\r\n    </div>\r\n    \r\n\r\n    <ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link active\" id=\"home-tab\" data-toggle=\"tab\" href=\"#home\" role=\"tab\" aria-controls=\"home\" aria-selected=\"true\">General</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Chart</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" id=\"contact-tab\" data-toggle=\"tab\" href=\"#contact\" role=\"tab\" aria-controls=\"contact\" aria-selected=\"false\">S&R</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Trade Plan</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Journal</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">RAW Data</a>\r\n      </li>\r\n    </ul>\r\n    <div class=\"tab-content\" id=\"myTabContent\">\r\n      <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-4\">\r\n            <div class=\"card\">\r\n              <div class=\"card-body\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-lg-12\">\r\n                    <h5>Stats</h5>\r\n                    <hr />\r\n                    <table class=\"table table-striped\">\r\n                      <tbody>\r\n                        <tr>\r\n                          <td><h5 style=\"margin-top: 6px;\">Quality Score</h5></td>\r\n                          <td><h3><span class=\"badge badge-success\">1.75</span></h3></td>\r\n                        </tr>\r\n                        <tr>\r\n                          <td><h5 style=\"margin-top: 6px;\">Current Price</h5></td>\r\n                          <td><h5 style=\"margin-top: 6px;\">$278.94</h5></td>\r\n                        </tr>\r\n                      </tbody>\r\n                    </table>\r\n\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"col-lg-4\">\r\n            <div class=\"card\">\r\n              <div class=\"card-body\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-lg-12\">\r\n                    <h5>20 Day Standard Devs</h5>\r\n                    <hr />\r\n                    <table class=\"table table-striped\">\r\n                      <tbody>\r\n                        <tr>\r\n                          <td></td>\r\n                          <td></td>\r\n                        </tr>\r\n                      </tbody>\r\n                    </table>\r\n\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"col-lg-4\">\r\n            <div class=\"card\">\r\n              <div class=\"card-body\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-lg-12\">\r\n                    <h5>Time Frame Analysis</h5>\r\n                    <hr />\r\n                    <table class=\"table table-striped\">\r\n                      <tbody>\r\n                        <tr>\r\n                          <td></td>\r\n                          <td></td>\r\n                        </tr>\r\n                      </tbody>\r\n                    </table>\r\n\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"tab-pane fade\" id=\"profile\" role=\"tabpanel\" aria-labelledby=\"profile-tab\">...</div>\r\n      <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n      <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n      <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n      <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n    </div>\r\n\r\n  </main>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n\r\n            <!--TICKER NAME-->\r\n            <div *ngIf=\"this.companyExists; then thenBlock else elseBlock\"></div>\r\n            <ng-template #thenBlock><h1>{{ticker.company.companyName}}</h1></ng-template>\r\n            <ng-template #elseBlock><h1>[No Name]</h1></ng-template>\r\n\r\n            <!--TICKER SYMBOL-->\r\n            <h5>({{ticker.ticker}})</h5>\r\n            <p>Type: {{ticker.assetType}}</p>\r\n            <br />\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n\r\n        <ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link active\" id=\"home-tab\" data-toggle=\"tab\" href=\"#home\" role=\"tab\" aria-controls=\"home\" aria-selected=\"true\">General</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Chart</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" id=\"contact-tab\" data-toggle=\"tab\" href=\"#contact\" role=\"tab\" aria-controls=\"contact\" aria-selected=\"false\">S&R</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Trade Plan</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">Journal</a>\r\n            </li>\r\n            <li class=\"nav-item\">\r\n                <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#profile\" role=\"tab\" aria-controls=\"profile\" aria-selected=\"false\">RAW Data</a>\r\n            </li>\r\n        </ul>\r\n        <div class=\"tab-content\" id=\"myTabContent\">\r\n            <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\r\n                <br />\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-4\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-lg-12\">\r\n                                        <h5>Stats</h5>\r\n                                        <hr />\r\n                                        <table class=\"table table-striped\">\r\n                                            <tbody>\r\n                                                <tr>\r\n                                                    <td><h5 style=\"margin-top: 6px;\">Quality Score</h5></td>\r\n                                                    <td><h3><span class=\"badge badge-success\">1.75</span></h3></td>\r\n                                                </tr>\r\n                                                <tr>\r\n                                                    <td><h5 style=\"margin-top: 6px;\">Current Price</h5></td>\r\n                                                    <td><h5 style=\"margin-top: 6px;\">$278.94</h5></td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-lg-4\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-lg-12\">\r\n                                        <h5>20 Day Standard Devs</h5>\r\n                                        <hr />\r\n                                        <table class=\"table table-striped\">\r\n                                            <tbody>\r\n                                                <tr>\r\n                                                    <td></td>\r\n                                                    <td></td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-lg-4\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-lg-12\">\r\n                                        <h5>Time Frame Analysis</h5>\r\n                                        <hr />\r\n                                        <table class=\"table table-striped\">\r\n                                            <tbody>\r\n                                                <tr>\r\n                                                    <td></td>\r\n                                                    <td></td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"tab-pane fade\" id=\"profile\" role=\"tabpanel\" aria-labelledby=\"profile-tab\">...</div>\r\n            <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n            <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n            <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n            <div class=\"tab-pane fade\" id=\"contact\" role=\"tabpanel\" aria-labelledby=\"contact-tab\">...</div>\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 

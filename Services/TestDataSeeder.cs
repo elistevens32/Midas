@@ -49,64 +49,15 @@ namespace Midas.Services
                 // AAPL TEST DATA
                 testData.SeedAAPLTestData();
 
-                // SEED COMPANIES
-                testData.SeedCompanies();
+                // TEST AAPL EOD SEED
+                //testData.SeedAaplEod();
+
             }
         }
 
-        private void SeedCompanies()
+        private void SeedAaplEod()
         {
-            _ctx.Database.EnsureCreated();
-
-            var tickerList = _tickerRepo.GetTestTickers(500);
-
-            if (!_ctx.Tickers.Any())
-            {
-                foreach (var ticker in tickerList)
-                {
-                    var requestString = $"{ApiTokens.iex_live_domain}{ApiTokens.iex_company_p1}{ticker.ticker}{ApiTokens.iex_company_p2}{ApiTokens.live_iex_public_token}";
-                    Console.WriteLine("");
-                    var settings = new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore
-                    };
-
-                    using (WebClient webClient = new WebClient())
-                    {
-                        try
-                        {
-                            var json = webClient.DownloadString(requestString);
-
-                            if (json == "Unknown symbol")
-                            {
-                                break;
-                            }
-                            var company = JsonConvert.DeserializeObject<Company>(json, settings);
-
-                            if (ticker.TiingoBool == true)
-                            {
-                                company.tiingoTickerId = ticker.id;
-                            }
-                            else if (ticker.IexBool == true)
-                            {
-                                company.iexTickerId = ticker.id;
-                            }
-                            else if (ticker.YahooBool == true)
-                            {
-                                company.yahooTickerId = ticker.id;
-                            }
-
-                            _repository.CreateCompany(company);
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.LogError($"Company Failed: {ex}");
-                        }
-
-                    }
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public void SeedAAPLTestData()

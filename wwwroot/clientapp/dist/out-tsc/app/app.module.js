@@ -22,6 +22,8 @@ import { TickerComponent } from './ticker/ticker.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TickerListComponent } from './ticker-list/ticker-list.component';
 import { DataService } from './shared/DataService';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -40,6 +42,8 @@ AppModule = __decorate([
             DashboardComponent,
             SideBarNav,
             TickerListComponent,
+            SettingsComponent,
+            ProfileComponent,
             FetchDataComponent
         ],
         imports: [

@@ -50,8 +50,8 @@ namespace Midas.Services
                 // SEED DAYS
                 seeder.SeedDays();
 
-                // TEST AAPL EOD SEED
-                //seeder.SeedAaplEod();
+                // SEED COMPANIES
+                //testData.SeedCompanies();
 
                 // SEED OPTIONS CYCLES
                 //seeder.SeedOptionCycles();
@@ -71,9 +71,59 @@ namespace Midas.Services
             }
         }
 
-        private void SeedAaplEod()
+        private void SeedCompanies()
         {
-            throw new NotImplementedException();
+            _ctx.Database.EnsureCreated();
+
+            var tickerList = _tickerRepo.GetTestTickers(500);
+
+            if (!_ctx.Tickers.Any())
+            {
+                foreach (var ticker in tickerList)
+                {
+                    var requestString = $"{ApiTokens.iex_live_domain}{ApiTokens.iex_company_p1}{ticker.ticker}{ApiTokens.iex_company_p2}{ApiTokens.live_iex_public_token}";
+                    Console.WriteLine("");
+                    var settings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    };
+
+                    using (WebClient webClient = new WebClient())
+                    {
+                        try
+                        {
+                            var json = webClient.DownloadString(requestString);
+
+                            if (json == "Unknown symbol")
+                            {
+                                break;
+                            }
+                            var company = JsonConvert.DeserializeObject<Company>(json, settings);
+
+                            if (ticker.TiingoBool == true)
+                            {
+                                company.tiingoTickerId = ticker.id;
+                            }
+                            else if (ticker.IexBool == true)
+                            {
+                                company.iexTickerId = ticker.id;
+                            }
+                            else if (ticker.YahooBool == true)
+                            {
+                                company.yahooTickerId = ticker.id;
+                            }
+
+                            //_repository.CreateCompany(company);
+                        }
+                        catch (Exception ex)
+                        {
+                            //_logger.LogError($"Company Failed: {ex}");
+                        }
+
+                    }
+                }
+            }
         }
 
         private void SeedOptionCycles()
@@ -96,7 +146,7 @@ namespace Midas.Services
 
             var daysBack = 0;
 
-            if (DevelopmentEnvironment.getEnvironment()){daysBack = 365;}else{daysBack = 3650;}
+            if (DevelopmentEnvironment.getEnvironment()) { daysBack = 365; } else { daysBack = 3650; }
 
             var daysList = Day.DaysBack(daysBack);
 

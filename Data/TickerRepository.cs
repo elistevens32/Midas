@@ -48,10 +48,19 @@ namespace Midas.Data
                .ToList();
         }
 
+        public Ticker GetTickerById(int id)
+        {
+            return _ctx.Tickers
+                           .Where(t => t.id == id)
+                           .Include(t => t.Company)
+                           .FirstOrDefault();
+        }
+
         public Ticker GetTickerBySymbol(String symbol)
         {
             return _ctx.Tickers
                            .Where(t => t.ticker == symbol)
+                           .Include(t => t.Company)
                            .FirstOrDefault();
         }
 

@@ -32,5 +32,20 @@ namespace Midas.Controllers
                 return BadRequest("Failed to get tickers");
             }
         }
+
+        [HttpGet("/api/tickers/{id}")]
+        public ActionResult<Ticker> Get(int id)
+        {
+            try
+            {
+                return repository.GetTickerById(id);
+            }
+            catch (System.Exception ex)
+            {
+
+                logger.LogError($"Failed to get tickers: {ex}");
+                return BadRequest("Failed to get tickers");
+            }
+        }
     }
 }
