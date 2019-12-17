@@ -1,0 +1,1 @@
+{"version":3,"file":"head.component.js","sourceRoot":"","sources":["../../../../../../ClientApp/app/head/head.component.ts"],"names":[],"mappings":";AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAM1C,IAAa,aAAa,GAA1B,MAAa,aAAa;IAA1B;QACI,UAAK,GAAG,MAAM,CAAC;IACnB,CAAC;CAAA,CAAA;AAFY,aAAa;IAJzB,SAAS,CAAC;QACP,QAAQ,EAAE,gBAAgB;QAC1B,WAAW,EAAE,uBAAuB;KACvC,CAAC;GACW,aAAa,CAEzB;SAFY,aAAa"}

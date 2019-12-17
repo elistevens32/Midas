@@ -1,0 +1,38 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>{{title}}</h5>
+            </div>
+            <div class="col-md-6">
+                <time-export></time-export>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ticker</th>
+                        <th>Price Currency</th>
+                        <th>Exchange</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of tickers">
+                        <td>{{t.id}}</td>
+                        <td><span class="badge badge-success">{{t.ticker}}</span></td>
+                        <td>{{t.priceCurrency}}</td>
+                        <td>{{t.exchange}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
