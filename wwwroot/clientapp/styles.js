@@ -557,7 +557,7 @@ module.exports = function (css) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\elist\Projects\Midas\ClientApp\styles.css */"./ClientApp/styles.css");
+module.exports = __webpack_require__(/*! D:\Projects\Midas\ClientApp\styles.css */"./ClientApp/styles.css");
 
 
 /***/ })

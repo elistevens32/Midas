@@ -12,6 +12,7 @@ export const appRoutes: Routes = [
     { path: 'dashboard/tickerlist', component: TickerListComponent },
     { path: 'dashboard/settings', component: SettingsComponent },
     { path: 'dashboard/profile', component: ProfileComponent },
+    { path: 'account/login', component: LoginComponent },
     { path: '', component: HomeComponent },
     //{ path: '', redirectTo: '/events', pathMatch: 'full' }
 ]

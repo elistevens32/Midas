@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TickerComponent } from './ticker/ticker.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -8,6 +9,7 @@ export const appRoutes = [
     { path: 'dashboard/tickerlist', component: TickerListComponent },
     { path: 'dashboard/settings', component: SettingsComponent },
     { path: 'dashboard/profile', component: ProfileComponent },
+    { path: 'account/login', component: LoginComponent },
     { path: '', component: HomeComponent },
 ];
 //# sourceMappingURL=route.js.map

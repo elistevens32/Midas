@@ -10,7 +10,7 @@ using Midas;
 namespace Midas.Migrations
 {
     [DbContext(typeof(MidasContext))]
-    [Migration("20191216201158_InitialDb")]
+    [Migration("20191218020734_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

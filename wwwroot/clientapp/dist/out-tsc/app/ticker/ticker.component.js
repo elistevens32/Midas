@@ -5,8 +5,8 @@ let TickerComponent = class TickerComponent {
         this.data = data;
         this.route = route;
         this.title = 'Ticker';
+        this.companyExists = false;
     }
-    ;
     ngOnInit() {
         this.route.params
             .subscribe((params) => {
@@ -16,6 +16,9 @@ let TickerComponent = class TickerComponent {
             .subscribe(success => {
             if (success) {
                 this.ticker = this.data.ticker;
+                if (this.data.ticker.company.companyName !== null) {
+                    this.companyExists = true;
+                }
             }
         });
     }

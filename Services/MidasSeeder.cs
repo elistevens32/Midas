@@ -390,8 +390,7 @@ namespace Midas.Services
         public void SeedTiingoTickers()
         {
             DateTime creation = File.GetCreationTime("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-
-            if (creation.Date != DateTime.Today && !_ctx.Tickers.Any())
+            if (creation.Date != DateTime.Today || !_ctx.Tickers.Any())
             {
                 _ctx.Database.EnsureCreated();
 
