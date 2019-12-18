@@ -49,15 +49,7 @@ namespace Midas.Services
                 // AAPL TEST DATA
                 testData.SeedAAPLTestData();
 
-                // TEST AAPL EOD SEED
-                //testData.SeedAaplEod();
-
             }
-        }
-
-        private void SeedAaplEod()
-        {
-            throw new NotImplementedException();
         }
 
         public void SeedAAPLTestData()
@@ -80,6 +72,7 @@ namespace Midas.Services
 
             if (_ctx.Tickers.Any())
             {
+
                 // SET EOD DATE
                 foreach (var EOD in records)
                 {

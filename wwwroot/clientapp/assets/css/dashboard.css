@@ -96,3 +96,14 @@ body {
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
 }
+
+/*
+ * General
+ */
+.primary-btn {
+    color: rgba(255, 255, 255, .25)!important;
+}
+
+.fav-star {
+    color: goldenrod;
+}

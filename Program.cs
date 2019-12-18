@@ -23,7 +23,7 @@ namespace Midas
                 MidasSeeder.RunSeeding(host);
 
                 // TEST DATA
-                //TestDataSeeder.SeedTestData(host);
+                TestDataSeeder.SeedTestData(host);
             }
 
             host.Run();

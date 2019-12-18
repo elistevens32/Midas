@@ -9,6 +9,7 @@ export class DataService {
     constructor(private http: HttpClient) {
     }
 
+    // TICKERS - START
     public tickers = [];
     public ticker;
 
@@ -20,7 +21,6 @@ export class DataService {
                     return true;
                 }));
     }
-
     getTicker(id) {
         return this.http.get("/api/tickers/" + id)
             .pipe(
@@ -29,5 +29,32 @@ export class DataService {
                     return true;
                 }));
     }
+    // TICKERS - END
+
+    // EODs - START
+    public eods = [];
+
+    getEODByTickerId(id) {
+        return this.http.get("/api/eod/" + id)
+            .pipe(
+                map((data: any[]) => {
+                    this.eods = data;
+                    return true;
+                }));
+    }
+    // EODs - END
+
+    // TEST - START
+    public aaplTicker;
+
+    getAaplTicker(ticker) {
+        return this.http.get("/api/tickers/" + ticker)
+            .pipe(
+                map((data: any[]) => {
+                    this.ticker = data;
+                    return true;
+                }));
+    }
+    // TEST - END
 
 }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Midas.Controllers
 {
-    [Route("api/[Controller]")]
     public class EodController : Controller
     {
         private readonly IEodRepository repository;
@@ -18,17 +17,20 @@ namespace Midas.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<EOD>> Get() {
+        // GET LIST OF EOD BY TICKER ID
+        [HttpGet("/api/eod/{id}")]
+        public ActionResult<IEnumerable<EOD>> Get(int id)
+        {
             try
             {
-                return repository.GetAllTestEOD();
+                return repository.GetEODsByTickerId(id);
+
             }
             catch (System.Exception ex)
             {
 
-                logger.LogError($"Failed to get tickers: {ex}");
-                return BadRequest("Failed to get tickers");
+                logger.LogError($"Failed to get End of Day Data: {ex}");
+                return BadRequest("Failed to get End of Day Data");
             }
         }
     }

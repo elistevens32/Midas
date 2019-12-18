@@ -5,10 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\app\profile\profile.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\angular-material.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\dashboard\widgets\favorite-tickers\favorite-tickers.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\models\Company.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\models\Day.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\models\EOD.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\models\Ticker.ts" />
     <TypeScriptCompile Remove="ClientApp\app\settings\settings.component.ts" />
     <TypeScriptCompile Remove="ClientApp\app\shared\DataService.ts" />
     <TypeScriptCompile Remove="ClientApp\app\ticker-list\ticker-list.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker-tab-route.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker\general\day-standard-dev\day-standard-dev.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker\general\general.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker\general\stats\stats.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker\general\TimeFrameAnalysis.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\app\ticker\raw-data\raw-data.component.ts" />
   </ItemGroup>
 
 

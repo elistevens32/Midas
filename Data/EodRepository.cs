@@ -20,31 +20,37 @@ namespace Midas.Data
             _logger = logger;
         }
 
-        public EOD GetTiingoEODByTickerId(int tickerId, int dayId)
+        // GENERAL - START
+        public List<EOD> GetEODsByTickerId(int tickerId)
         {
             return _ctx.EODs
-               .Where(e => (e.TickerId == tickerId) &&
-               (e.DayId == dayId))
-               .FirstOrDefault();
-        }
-
-        public List<EOD> GetEODByTickerIDAndDateRange(int tickerId, List<Day> dayList)
-        {
-            var startDate = dayList.First();
-            var endDate = dayList.Last();
-
-            return _ctx.EODs
-               .OrderBy(e => e.Date)
-               .Where(e => (e.TickerId == tickerId) &&
-               (e.Date >= startDate.Date && e.Date < endDate.Date))
+               .OrderByDescending(e => e.Date)
+               .Include(eod => eod.Day)
+               .Include(eod => eod.Ticker)
+               .Where(e => e.TickerId == tickerId)
                .ToList();
         }
+        // GENERAL - END
 
+        // TIINGO - START
+        public List<EOD> GetTiingoEODByTickerId(int tickerId)
+        {
+            return _ctx.EODs
+               .OrderByDescending(e => e.Date)
+               .Include(eod => eod.Day)
+               .Include(eod => eod.Ticker)
+               .Where(e => (e.id == tickerId) &&
+               (e.TiingoBool == true))
+               .ToList();
+        }
+        // TIINGO - END
+
+        // TEST - START
         public List<EOD> GetAllTestEOD()
         {
-            
+
             return _ctx.EODs
-               .OrderBy(e => e.Date)
+               .OrderByDescending(e => e.Date)
                .Include(eod => eod.Day)
                .Include(eod => eod.Ticker)
                .Where(e => (e.TiingoBool == false) &&
@@ -53,6 +59,21 @@ namespace Midas.Data
                .ToList();
 
         }
+        // TEST - END
+
+        public List<EOD> GetEODByTickerIDAndDateRange(int tickerId, List<Day> dayList)
+        {
+            var startDate = dayList.First();
+            var endDate = dayList.Last();
+
+            return _ctx.EODs
+               .OrderByDescending(e => e.Date)
+               .Where(e => (e.TickerId == tickerId) &&
+               (e.Date >= startDate.Date && e.Date < endDate.Date))
+               .ToList();
+        }
+
+
 
         public EOD CreateEod(EOD EodObj, Day day, Ticker ticker, string source)
         {

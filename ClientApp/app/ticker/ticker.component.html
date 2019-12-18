@@ -4,122 +4,60 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="pb-2 mb-3 border-bottom">
 
-            <!--TICKER NAME-->
-            <div *ngIf="this.companyExists; then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock><h1>{{ticker.company.companyName}}</h1></ng-template>
-            <ng-template #elseBlock><h1>[No Name]</h1></ng-template>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <!--TICKER NAME-->
+                        <div *ngIf="this.companyExists; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock><h1>{{ticker.company?.companyName}}</h1></ng-template>
+                        <ng-template #elseBlock><h1>[No Name]</h1></ng-template>
 
-            <!--TICKER SYMBOL-->
-            <h5>({{ticker.ticker}})</h5>
-            <p>Type: {{ticker.assetType}}</p>
-            <br />
+                        <!--TICKER SYMBOL-->
+                        <h5>({{ticker?.ticker}})</h5>
+                        <p>Type: {{ticker?.assetType}}</p>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Timeframe</mat-label>
+                            <mat-select [(value)]="selected">
+                                <mat-option>None</mat-option>
+                                <mat-option value="30days">30 Days</mat-option>
+                                <mat-option value="60days">60 Days</mat-option>
+                                <mat-option value="90days">90 Days</mat-option>
+                                <mat-option value="120days">120 Days</mat-option>
+                                <mat-option value="150days">150 Days</mat-option>
+                                <mat-option value="180days">180 Days</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </div>
+            
             <breadcrumb></breadcrumb>
         </div>
 
+        <mat-tab-group>
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Chart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">S&R</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Trade Plan</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Journal</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">RAW Data</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <!--GENERAL-->
+            <mat-tab label="General">
                 <br />
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h5>Stats</h5>
-                                        <hr />
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <td><h5 style="margin-top: 6px;">Quality Score</h5></td>
-                                                    <td><h3><span class="badge badge-success">1.75</span></h3></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><h5 style="margin-top: 6px;">Current Price</h5></td>
-                                                    <td><h5 style="margin-top: 6px;">$278.94</h5></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                <general></general>
+            </mat-tab>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <mat-tab label="Chart"> Chart </mat-tab>
+            <mat-tab label="S&R"> S&R </mat-tab>
+            <mat-tab label="Trade Plan"> Trade Plan </mat-tab>
+            <mat-tab label="Journal"> Journal </mat-tab>
 
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h5>20 Day Standard Devs</h5>
-                                        <hr />
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+            <!--RAW DATA-->
+            <mat-tab label="Raw Data">
+                <br />
+                <raw-data></raw-data>
+            </mat-tab>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h5>Time Frame Analysis</h5>
-                                        <hr />
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-        </div>
+        </mat-tab-group>
 
     </main>
 </div>

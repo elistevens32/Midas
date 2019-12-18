@@ -1,0 +1,47 @@
+﻿<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.date | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="open">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Open </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.open | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="high">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> High </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.high | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="low">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Low </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.low | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="close">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Close </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.close | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Volume </th>
+        <td mat-cell *matCellDef="let eod"> {{eod.volume | number}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[30, 60, 90]" showFirstLastButtons></mat-paginator>

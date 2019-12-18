@@ -14,6 +14,7 @@ using System.Net;
 using Midas.Data.Extensions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Midas.Services
 {
@@ -25,8 +26,14 @@ namespace Midas.Services
         private readonly IDayRepository _dayRepository;
         private readonly ITickerRepository _tickerRepo;
         private readonly IEodRepository _eodRepo;
+        private readonly ILogger<MidasSeeder> _logger;
 
-        public MidasSeeder(MidasContext ctx, IWebHostEnvironment hosting, UserManager<MidasUser> userManager, IDayRepository dayRepository, ITickerRepository tickerRepo, IEodRepository EodRepo)
+        public MidasSeeder(MidasContext ctx, IWebHostEnvironment hosting, 
+            UserManager<MidasUser> userManager, 
+            IDayRepository dayRepository, 
+            ITickerRepository tickerRepo, 
+            IEodRepository EodRepo,
+            ILogger<MidasSeeder> logger)
         {
             _ctx = ctx;
             _hosting = hosting;
@@ -34,6 +41,7 @@ namespace Midas.Services
             _dayRepository = dayRepository;
             _tickerRepo = tickerRepo;
             _eodRepo = EodRepo;
+            _logger = logger;
         }
 
         public static void RunSeeding(IHost host)
@@ -118,7 +126,7 @@ namespace Midas.Services
                         }
                         catch (Exception ex)
                         {
-                            //_logger.LogError($"Company Failed: {ex}");
+                            _logger.LogError($"Company Failed: {ex}");
                         }
 
                     }
@@ -254,57 +262,57 @@ namespace Midas.Services
 
                 foreach (var day in daysList)
                 {
-                    var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
+                    //var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
 
-                    if (EodItem.AdjOpen != 0)
-                    {
-                        var formattedDate = String.Format("{0:yyyyMMdd}", day.Date);
+                    //if (EodItem.AdjOpen != 0)
+                    //{
+                    //    var formattedDate = String.Format("{0:yyyyMMdd}", day.Date);
 
-                        var requestString = $"{ApiTokens.iex_sandbox_domain}{ApiTokens.iex_historical_day_p1}{ticker.ticker}{ApiTokens.iex_historical_day_p2}{formattedDate}?chartByDay=true&token={ApiTokens.test_iex_public_token}";
+                    //    var requestString = $"{ApiTokens.iex_sandbox_domain}{ApiTokens.iex_historical_day_p1}{ticker.ticker}{ApiTokens.iex_historical_day_p2}{formattedDate}?chartByDay=true&token={ApiTokens.test_iex_public_token}";
 
-                        try
-                        {
-                            using (WebClient webClient = new WebClient())
-                            {
-                                webClient.BaseAddress = ApiTokens.tiingo_production;
-                                var json = webClient.DownloadString(requestString);
-                                var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
+                    //    try
+                    //    {
+                    //        using (WebClient webClient = new WebClient())
+                    //        {
+                    //            webClient.BaseAddress = ApiTokens.tiingo_production;
+                    //            var json = webClient.DownloadString(requestString);
+                    //            var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
 
-                                if (eodList.Count == 0)
-                                {
-                                    var emptyEod = new EOD();
-                                    emptyEod.IexBool = true;
-                                    emptyEod.TickerId = ticker.id;
-                                    emptyEod.DayId = day.id;
-                                    emptyEod.Open = 0.00;
-                                    emptyEod.High = 0.00;
-                                    emptyEod.Low = 0.00;
-                                    emptyEod.Close = 0.00;
-                                    emptyEod.Volume = 0;
+                    //            if (eodList.Count == 0)
+                    //            {
+                    //                var emptyEod = new EOD();
+                    //                emptyEod.IexBool = true;
+                    //                emptyEod.TickerId = ticker.id;
+                    //                emptyEod.DayId = day.id;
+                    //                emptyEod.Open = 0.00;
+                    //                emptyEod.High = 0.00;
+                    //                emptyEod.Low = 0.00;
+                    //                emptyEod.Close = 0.00;
+                    //                emptyEod.Volume = 0;
 
-                                    _ctx.EODs.Add(emptyEod);
-                                    _ctx.SaveChanges();
-                                }
-                                else
-                                {
-                                    foreach (var item in eodList)
-                                    {
-                                        item.TickerId = ticker.id;
-                                        item.DayId = day.id;
-                                        item.IexBool = true;
+                    //                _ctx.EODs.Add(emptyEod);
+                    //                _ctx.SaveChanges();
+                    //            }
+                    //            else
+                    //            {
+                    //                foreach (var item in eodList)
+                    //                {
+                    //                    item.TickerId = ticker.id;
+                    //                    item.DayId = day.id;
+                    //                    item.IexBool = true;
 
-                                        _ctx.EODs.Add(item);
-                                        _ctx.SaveChanges();
-                                    }
-                                }
+                    //                    _ctx.EODs.Add(item);
+                    //                    _ctx.SaveChanges();
+                    //                }
+                    //            }
 
-                            }
-                        }
-                        catch (WebException ex)
-                        {
-                            throw ex;
-                        }
-                    }
+                    //        }
+                    //    }
+                    //    catch (WebException ex)
+                    //    {
+                    //        throw ex;
+                    //    }
+                    //}
 
                 }
 
@@ -328,59 +336,59 @@ namespace Midas.Services
 
                 foreach (var day in daysList)
                 {
-                    var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
+                    //var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
 
-                    if (EodItem == null)
-                    {
-                        var formattedDate = String.Format("{0:yyyy-MM-dd}", day.Date);
+                    //if (EodItem == null)
+                    //{
+                    //    var formattedDate = String.Format("{0:yyyy-MM-dd}", day.Date);
 
-                        var requestString = $"{ApiTokens.tiingo_production}{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
+                    //    var requestString = $"{ApiTokens.tiingo_production}{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
 
-                        var downloadString = $"{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
+                    //    var downloadString = $"{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
 
-                        try
-                        {
-                            using (WebClient webClient = new WebClient())
-                            {
-                                webClient.BaseAddress = ApiTokens.tiingo_production;
-                                var json = webClient.DownloadString(downloadString);
-                                var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
+                    //    try
+                    //    {
+                    //        using (WebClient webClient = new WebClient())
+                    //        {
+                    //            webClient.BaseAddress = ApiTokens.tiingo_production;
+                    //            var json = webClient.DownloadString(downloadString);
+                    //            var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
 
-                                if (eodList.Count == 0)
-                                {
-                                    var emptyEod = new EOD();
-                                    emptyEod.TiingoBool = true;
-                                    emptyEod.TickerId = ticker.id;
-                                    emptyEod.DayId = day.id;
-                                    emptyEod.Open = 0.00;
-                                    emptyEod.High = 0.00;
-                                    emptyEod.Low = 0.00;
-                                    emptyEod.Close = 0.00;
-                                    emptyEod.Volume = 0;
+                    //            if (eodList.Count == 0)
+                    //            {
+                    //                var emptyEod = new EOD();
+                    //                emptyEod.TiingoBool = true;
+                    //                emptyEod.TickerId = ticker.id;
+                    //                emptyEod.DayId = day.id;
+                    //                emptyEod.Open = 0.00;
+                    //                emptyEod.High = 0.00;
+                    //                emptyEod.Low = 0.00;
+                    //                emptyEod.Close = 0.00;
+                    //                emptyEod.Volume = 0;
 
-                                    _ctx.EODs.Add(emptyEod);
-                                    _ctx.SaveChanges();
-                                }
-                                else
-                                {
-                                    foreach (var item in eodList)
-                                    {
-                                        item.TickerId = ticker.id;
-                                        item.DayId = day.id;
-                                        item.TiingoBool = true;
+                    //                _ctx.EODs.Add(emptyEod);
+                    //                _ctx.SaveChanges();
+                    //            }
+                    //            else
+                    //            {
+                    //                foreach (var item in eodList)
+                    //                {
+                    //                    item.TickerId = ticker.id;
+                    //                    item.DayId = day.id;
+                    //                    item.TiingoBool = true;
 
-                                        _ctx.EODs.Add(item);
-                                        _ctx.SaveChanges();
-                                    }
-                                }
+                    //                    _ctx.EODs.Add(item);
+                    //                    _ctx.SaveChanges();
+                    //                }
+                    //            }
 
-                            }
-                        }
-                        catch (WebException ex)
-                        {
-                            throw ex;
-                        }
-                    }
+                    //        }
+                    //    }
+                    //    catch (WebException ex)
+                    //    {
+                    //        throw ex;
+                    //    }
+                    //}
 
                 }
 
@@ -389,8 +397,7 @@ namespace Midas.Services
 
         public void SeedTiingoTickers()
         {
-            DateTime creation = File.GetCreationTime("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-            if (creation.Date != DateTime.Today || !_ctx.Tickers.Any())
+            if (!_ctx.Tickers.Any())
             {
                 _ctx.Database.EnsureCreated();
 
@@ -402,21 +409,26 @@ namespace Midas.Services
                     IgnoreBlankLines = false
                 };
 
-                TextReader reader = new StreamReader("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-                var csvReader = new CsvReader(reader, config);
-                var records = csvReader.GetRecords<Ticker>();
+                // CHECK FILE DATE CREATED
+                DateTime creation = File.GetCreationTime("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
 
-                var updatedList = new List<Ticker>();
+                if (creation.Date != DateTime.Today) {
+                    TextReader reader = new StreamReader("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
+                    var csvReader = new CsvReader(reader, config);
+                    var records = csvReader.GetRecords<Ticker>();
 
-                // SET TIINGO TO TRUE
-                foreach (var ticker in records)
-                {
-                    ticker.TiingoBool = true;
-                    updatedList.Add(ticker);
+                    var updatedList = new List<Ticker>();
+
+                    // SET TIINGO TO TRUE
+                    foreach (var ticker in records)
+                    {
+                        ticker.TiingoBool = true;
+                        updatedList.Add(ticker);
+                    }
+
+                    _ctx.Tickers.AddRange(updatedList);
+                    _ctx.SaveChanges();
                 }
-
-                _ctx.Tickers.AddRange(updatedList);
-                _ctx.SaveChanges();
             }
 
         }

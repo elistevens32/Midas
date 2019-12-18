@@ -9,10 +9,17 @@ namespace Midas.Data
 {
     public interface IEodRepository
     {
-
-        EOD GetTiingoEODByTickerId(int tickerId, int dayId);
+        // GENERAL
+        List<EOD> GetEODsByTickerId(int tickerId);
         List<EOD> GetEODByTickerIDAndDateRange(int tickerId, List<Day> dayList);
+
+        // TIINGO
+        List<EOD> GetTiingoEODByTickerId(int tickerId);
+
+        // TEST
         List<EOD> GetAllTestEOD();
+        
+        // CRUD
         EOD CreateEod(EOD eOD, Day day, Ticker ticker, string source);
     }
 }
