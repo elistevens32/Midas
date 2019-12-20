@@ -35,7 +35,8 @@ import { TimeFrameAnalysis } from './ticker/general/time-frame-analysis/time-fra
 import { StatsComponent } from './ticker/general/stats/stats.component';
 import { GeneralComponent } from './ticker/general/general.component';
 import { DayStandardDev } from './ticker/general/day-standard-dev/day-standard-dev.component';
-
+import { ChartComponent } from './ticker/chart/chart.component';
+import { CompanyInfo } from './ticker/company-info/company-info.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,8 @@ import { DayStandardDev } from './ticker/general/day-standard-dev/day-standard-d
         GeneralComponent,
         StatsComponent,
         TimeFrameAnalysis,
+        ChartComponent,
+        CompanyInfo,
         FetchDataComponent
     ],
     imports: [

@@ -12,6 +12,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatBadgeModule,
+    MatChipsModule,
     MatTableModule
 } from '@angular/material';
 
@@ -29,6 +31,8 @@ import {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatBadgeModule,
+        MatChipsModule,
         MatTableModule
     ],
     exports: [
@@ -43,6 +47,8 @@ import {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatBadgeModule,
+        MatChipsModule,
         MatTableModule
     ]
 })

@@ -1,0 +1,92 @@
+﻿<mat-card class="company-info-card">
+    <mat-card-content>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>{{ticker.company.companyName}}</h3>
+                {{ticker.company.description}}
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td><b>Symbol</b></td>
+                            <td>{{ticker.company.symbol}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Security Name</b></td>
+                            <td>{{ticker.company.securityName}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Exchange</b></td>
+                            <td>{{ticker.company.exchange}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Industry</b></td>
+                            <td>{{ticker.company.industry}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Sector</b></td>
+                            <td>{{ticker.company.sector}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Primary SIC Code</b></td>
+                            <td>{{ticker.company.primarySicCode}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Issue Type</b></td>
+                            <td>{{ticker.company.issueType}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td><b>CEO</b></td>
+                            <td>{{ticker.company.ceo}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Number of Employees</b></td>
+                            <td>{{ticker.company.employees | number}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Address</b></td>
+                            <td>
+                                {{ticker.company.address}}
+                                <br />
+                                {{ticker.company?.address2}}
+                                <br />
+                                {{ticker.company?.state}}
+                                <br />
+                                {{ticker.company?.city}}
+                                <br />
+                                {{ticker.company?.zip}}
+                                <br />
+                                {{ticker.company?.country}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Phone</b></td>
+                            <td>{{ticker.company.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Website</b></td>
+                            <td><a target="_blank" href="{{ticker.company.website}}">{{ticker.company.website}}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+
+
+    </mat-card-content>
+</mat-card>

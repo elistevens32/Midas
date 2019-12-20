@@ -1,6 +1,6 @@
 ﻿import { Company } from './Company';
 
-export class Ticker {
+export interface Ticker {
     id: number;
     CompanyId: number;
     Company: Company;
@@ -22,3 +22,9 @@ export class Ticker {
     type: string;
     industry: string;
 }
+
+export interface TickerResolved {
+    product: Ticker;
+    error?: any;
+}
+

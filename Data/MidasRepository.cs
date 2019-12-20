@@ -25,6 +25,21 @@ namespace Midas
             _ctx.Add(model);
         }
 
+        public List<Company> GetCompaniesThatAreGood()
+        {
+            return _ctx.Companys
+                .Where(c => (c.Symbol != null) &&
+                (c.CompanyName != null) &&
+                (c.iexTickerId != 0))
+               .ToList();
+        }
+
+        public List<Company> GetAllCompanies()
+        {
+            return _ctx.Companys
+               .ToList();
+        }
+
         public void CreateCompany(Company Company)
         {
             var companyCheck = _ctx.Companys
@@ -39,7 +54,7 @@ namespace Midas
                 _ctx.Companys.Add(companyObj);
                 _ctx.SaveChanges();
             }
-            
+
         }
 
 

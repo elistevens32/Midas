@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dutch-app": {
+    "midas_systems": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -88,22 +88,22 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "dutch-app:build"
+            "browserTarget": "midas_systems:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dutch-app:build:production"
+              "browserTarget": "midas_systems:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dutch-app:build"
+            "browserTarget": "midas_systems:build"
           }
         }
       }
     }
   },
-  "defaultProject": "dutch-app"
+  "defaultProject": "midas_systems"
 }

@@ -15,6 +15,7 @@ using Midas.Data.Extensions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Midas.Services
 {
@@ -26,13 +27,16 @@ namespace Midas.Services
         private readonly IDayRepository _dayRepository;
         private readonly ITickerRepository _tickerRepo;
         private readonly IEodRepository _eodRepo;
+        private readonly IMidasRepository _repository;
         private readonly ILogger<MidasSeeder> _logger;
 
-        public MidasSeeder(MidasContext ctx, IWebHostEnvironment hosting, 
-            UserManager<MidasUser> userManager, 
-            IDayRepository dayRepository, 
-            ITickerRepository tickerRepo, 
+        public MidasSeeder(MidasContext ctx,
+            IWebHostEnvironment hosting,
+            UserManager<MidasUser> userManager,
+            IDayRepository dayRepository,
+            ITickerRepository tickerRepo,
             IEodRepository EodRepo,
+            IMidasRepository repository,
             ILogger<MidasSeeder> logger)
         {
             _ctx = ctx;
@@ -41,6 +45,7 @@ namespace Midas.Services
             _dayRepository = dayRepository;
             _tickerRepo = tickerRepo;
             _eodRepo = EodRepo;
+            _repository = repository;
             _logger = logger;
         }
 
@@ -59,7 +64,7 @@ namespace Midas.Services
                 seeder.SeedDays();
 
                 // SEED COMPANIES
-                //testData.SeedCompanies();
+                seeder.SeedCompanies();
 
                 // SEED OPTIONS CYCLES
                 //seeder.SeedOptionCycles();
@@ -81,16 +86,18 @@ namespace Midas.Services
 
         private void SeedCompanies()
         {
+
             _ctx.Database.EnsureCreated();
 
             var tickerList = _tickerRepo.GetTestTickers(500);
+            var firstCompanyId = tickerList[0].CompanyId;
 
-            if (!_ctx.Tickers.Any())
+            if (tickerList.Any() && firstCompanyId == 0)
             {
                 foreach (var ticker in tickerList)
                 {
                     var requestString = $"{ApiTokens.iex_live_domain}{ApiTokens.iex_company_p1}{ticker.ticker}{ApiTokens.iex_company_p2}{ApiTokens.live_iex_public_token}";
-                    Console.WriteLine("");
+
                     var settings = new JsonSerializerSettings
                     {
                         NullValueHandling = NullValueHandling.Ignore,
@@ -122,7 +129,8 @@ namespace Midas.Services
                                 company.yahooTickerId = ticker.id;
                             }
 
-                            //_repository.CreateCompany(company);
+                            ticker.Company = company;
+                            _ctx.SaveChanges();
                         }
                         catch (Exception ex)
                         {
@@ -412,23 +420,22 @@ namespace Midas.Services
                 // CHECK FILE DATE CREATED
                 DateTime creation = File.GetCreationTime("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
 
-                if (creation.Date != DateTime.Today) {
-                    TextReader reader = new StreamReader("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
-                    var csvReader = new CsvReader(reader, config);
-                    var records = csvReader.GetRecords<Ticker>();
+                TextReader reader = new StreamReader("Data/Seed/tiingo_tickers/extract/supported_tickers.csv");
+                var csvReader = new CsvReader(reader, config);
+                var records = csvReader.GetRecords<Ticker>();
 
-                    var updatedList = new List<Ticker>();
+                var updatedList = new List<Ticker>();
 
-                    // SET TIINGO TO TRUE
-                    foreach (var ticker in records)
-                    {
-                        ticker.TiingoBool = true;
-                        updatedList.Add(ticker);
-                    }
-
-                    _ctx.Tickers.AddRange(updatedList);
-                    _ctx.SaveChanges();
+                // SET TIINGO TO TRUE
+                foreach (var ticker in records)
+                {
+                    ticker.TiingoBool = true;
+                    updatedList.Add(ticker);
                 }
+
+                _ctx.Tickers.AddRange(updatedList);
+                _ctx.SaveChanges();
+
             }
 
         }

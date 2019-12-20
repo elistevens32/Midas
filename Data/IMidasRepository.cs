@@ -12,5 +12,7 @@ namespace Midas
         bool SaveAll();
         void AddEntity(object model);
         void CreateCompany(Company Company);
+        List<Company> GetCompaniesThatAreGood();
+        List<Company> GetAllCompanies();
     }
 }

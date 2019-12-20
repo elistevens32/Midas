@@ -97,6 +97,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ticker_general_stats_stats_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./ticker/general/stats/stats.component */ "./ClientApp/app/ticker/general/stats/stats.component.ts");
 /* harmony import */ var _ticker_general_general_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./ticker/general/general.component */ "./ClientApp/app/ticker/general/general.component.ts");
 /* harmony import */ var _ticker_general_day_standard_dev_day_standard_dev_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./ticker/general/day-standard-dev/day-standard-dev.component */ "./ClientApp/app/ticker/general/day-standard-dev/day-standard-dev.component.ts");
+/* harmony import */ var _ticker_chart_chart_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./ticker/chart/chart.component */ "./ClientApp/app/ticker/chart/chart.component.ts");
+/* harmony import */ var _ticker_company_info_company_info_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./ticker/company-info/company-info.component */ "./ClientApp/app/ticker/company-info/company-info.component.ts");
 
 
 
@@ -107,6 +109,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // COMPONENTS
+
+
 
 
 
@@ -158,6 +162,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ticker_general_general_component__WEBPACK_IMPORTED_MODULE_32__["GeneralComponent"],
             _ticker_general_stats_stats_component__WEBPACK_IMPORTED_MODULE_31__["StatsComponent"],
             _ticker_general_time_frame_analysis_time_frame_analysis_component__WEBPACK_IMPORTED_MODULE_30__["TimeFrameAnalysis"],
+            _ticker_chart_chart_component__WEBPACK_IMPORTED_MODULE_34__["ChartComponent"],
+            _ticker_company_info_company_info_component__WEBPACK_IMPORTED_MODULE_35__["CompanyInfo"],
             _fetch_data_fetch_data_component__WEBPACK_IMPORTED_MODULE_11__["FetchDataComponent"]
         ],
         imports: [
@@ -432,7 +438,7 @@ HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".main-bg {\n  background-color: #212325;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n\n.card {\n  border: 1px solid #999999;\n}\n\n.card-login {\n  margin-top: 130px;\n  padding: 18px;\n  max-width: 30rem;\n}\n\n.card-header {\n  color: #fff;\n  font-family: sans-serif;\n  font-size: 20px;\n  font-weight: 600 !important;\n  margin-top: 10px;\n  border-bottom: 0;\n}\n\n.input-group-prepend span {\n  width: 50px;\n  background-color: #2d2d2d;\n  color: #fff;\n  border: 0 !important;\n}\n\ninput:focus {\n  outline: 0 0 0 0 !important;\n  box-shadow: 0 0 0 0 !important;\n}\n\n.login_btn {\n  width: 130px;\n}\n\n.login_btn:hover {\n    color: #fff;\n    background-color: #ff0000;\n  }\n\n.btn-outline-danger {\n  color: #fff;\n  font-size: 18px;\n  background-color: #2d2d2d;\n  background-image: none;\n  border-color: #2d2d2d;\n}\n\n.form-control {\n  display: block;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 0.75rem;\n  font-size: 1.2rem;\n  line-height: 1.6;\n  color: #ffffff;\n  background-color: transparent;\n  background-clip: padding-box;\n  border: 1px solid #666666;\n  border-radius: 0;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n\n.input-group-text {\n  display: flex;\n  align-items: center;\n  padding: 0 0 0 1rem;\n  margin-bottom: 0;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1.6;\n  color: #495057;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #e9ecef;\n  border: 1px solid #ced4da;\n  border-radius: 0;\n}\n\n/*LOGO*/\n\n.logo-font {\n  margin-top: 10px;\n  font-size: 2em;\n  font-family: Futura, \"Trebuchet MS\", Arial, sans-serif;\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaWVudEFwcC9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsTUFBTTtFQUNOLE9BQU87RUFDUCxRQUFRO0VBQ1IsU0FBUztBQUNYOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsdUJBQXVCO0VBQ3ZCLGVBQWU7RUFDZiwyQkFBMkI7RUFDM0IsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsV0FBVztFQUNYLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLDJCQUEyQjtFQUMzQiw4QkFBOEI7QUFDaEM7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUU7SUFDRSxXQUFXO0lBQ1gseUJBQXlCO0VBQzNCOztBQUVGO0VBQ0UsV0FBVztFQUNYLGVBQWU7RUFDZix5QkFBeUI7RUFDekIsc0JBQXNCO0VBQ3RCLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxXQUFXO0VBQ1gsMkJBQTJCO0VBQzNCLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCw2QkFBNkI7RUFDN0IsNEJBQTRCO0VBQzVCLHlCQUF5QjtFQUN6QixnQkFBZ0I7RUFDaEIsd0VBQXdFO0FBQzFFOztBQUVBO0VBRUUsYUFBYTtFQUViLG1CQUFtQjtFQUNuQixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLHlCQUF5QjtFQUN6Qix5QkFBeUI7RUFDekIsZ0JBQWdCO0FBQ2xCOztBQUVBLE9BQU87O0FBRVA7RUFDRSxnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLHNEQUFzRDtBQUN4RCIsImZpbGUiOiJDbGllbnRBcHAvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFpbi1iZyB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMyMTIzMjU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xufVxuXG4uY2FyZCB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICM5OTk5OTk7XG59XG5cbi5jYXJkLWxvZ2luIHtcbiAgbWFyZ2luLXRvcDogMTMwcHg7XG4gIHBhZGRpbmc6IDE4cHg7XG4gIG1heC13aWR0aDogMzByZW07XG59XG5cbi5jYXJkLWhlYWRlciB7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBmb250LXdlaWdodDogNjAwICFpbXBvcnRhbnQ7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG4gIGJvcmRlci1ib3R0b206IDA7XG59XG5cbi5pbnB1dC1ncm91cC1wcmVwZW5kIHNwYW4ge1xuICB3aWR0aDogNTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzJkMmQyZDtcbiAgY29sb3I6ICNmZmY7XG4gIGJvcmRlcjogMCAhaW1wb3J0YW50O1xufVxuXG5pbnB1dDpmb2N1cyB7XG4gIG91dGxpbmU6IDAgMCAwIDAgIWltcG9ydGFudDtcbiAgYm94LXNoYWRvdzogMCAwIDAgMCAhaW1wb3J0YW50O1xufVxuXG4ubG9naW5fYnRuIHtcbiAgd2lkdGg6IDEzMHB4O1xufVxuXG4gIC5sb2dpbl9idG46aG92ZXIge1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNmZjAwMDA7XG4gIH1cblxuLmJ0bi1vdXRsaW5lLWRhbmdlciB7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICMyZDJkMmQ7XG4gIGJhY2tncm91bmQtaW1hZ2U6IG5vbmU7XG4gIGJvcmRlci1jb2xvcjogIzJkMmQyZDtcbn1cblxuLmZvcm0tY29udHJvbCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiBjYWxjKDIuMjVyZW0gKyAycHgpO1xuICBwYWRkaW5nOiAwLjM3NXJlbSAwLjc1cmVtO1xuICBmb250LXNpemU6IDEuMnJlbTtcbiAgbGluZS1oZWlnaHQ6IDEuNjtcbiAgY29sb3I6ICNmZmZmZmY7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICBiYWNrZ3JvdW5kLWNsaXA6IHBhZGRpbmctYm94O1xuICBib3JkZXI6IDFweCBzb2xpZCAjNjY2NjY2O1xuICBib3JkZXItcmFkaXVzOiAwO1xuICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC4xNXMgZWFzZS1pbi1vdXQsIGJveC1zaGFkb3cgMC4xNXMgZWFzZS1pbi1vdXQ7XG59XG5cbi5pbnB1dC1ncm91cC10ZXh0IHtcbiAgZGlzcGxheTogLW1zLWZsZXhib3g7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIC1tcy1mbGV4LWFsaWduOiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDAgMCAwIDFyZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGZvbnQtc2l6ZTogMS41cmVtO1xuICBmb250LXdlaWdodDogNzAwO1xuICBsaW5lLWhlaWdodDogMS42O1xuICBjb2xvcjogIzQ5NTA1NztcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTllY2VmO1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2VkNGRhO1xuICBib3JkZXItcmFkaXVzOiAwO1xufVxuXG4vKkxPR08qL1xuXG4ubG9nby1mb250IHtcbiAgbWFyZ2luLXRvcDogMTBweDtcbiAgZm9udC1zaXplOiAyZW07XG4gIGZvbnQtZmFtaWx5OiBGdXR1cmEsIFwiVHJlYnVjaGV0IE1TXCIsIEFyaWFsLCBzYW5zLXNlcmlmO1xufVxyXG4iXX0= */"
+module.exports = ".main-bg {\r\n  background-color: #212325;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n}\r\n\r\n.card {\r\n  border: 1px solid #999999;\r\n}\r\n\r\n.card-login {\r\n  margin-top: 130px;\r\n  padding: 18px;\r\n  max-width: 30rem;\r\n}\r\n\r\n.card-header {\r\n  color: #fff;\r\n  font-family: sans-serif;\r\n  font-size: 20px;\r\n  font-weight: 600 !important;\r\n  margin-top: 10px;\r\n  border-bottom: 0;\r\n}\r\n\r\n.input-group-prepend span {\r\n  width: 50px;\r\n  background-color: #2d2d2d;\r\n  color: #fff;\r\n  border: 0 !important;\r\n}\r\n\r\ninput:focus {\r\n  outline: 0 0 0 0 !important;\r\n  box-shadow: 0 0 0 0 !important;\r\n}\r\n\r\n.login_btn {\r\n  width: 130px;\r\n}\r\n\r\n.login_btn:hover {\r\n    color: #fff;\r\n    background-color: #ff0000;\r\n  }\r\n\r\n.btn-outline-danger {\r\n  color: #fff;\r\n  font-size: 18px;\r\n  background-color: #2d2d2d;\r\n  background-image: none;\r\n  border-color: #2d2d2d;\r\n}\r\n\r\n.form-control {\r\n  display: block;\r\n  width: 100%;\r\n  height: calc(2.25rem + 2px);\r\n  padding: 0.375rem 0.75rem;\r\n  font-size: 1.2rem;\r\n  line-height: 1.6;\r\n  color: #ffffff;\r\n  background-color: transparent;\r\n  background-clip: padding-box;\r\n  border: 1px solid #666666;\r\n  border-radius: 0;\r\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\r\n}\r\n\r\n.input-group-text {\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 0 0 0 1rem;\r\n  margin-bottom: 0;\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n  line-height: 1.6;\r\n  color: #495057;\r\n  text-align: center;\r\n  white-space: nowrap;\r\n  background-color: #e9ecef;\r\n  border: 1px solid #ced4da;\r\n  border-radius: 0;\r\n}\r\n\r\n/*LOGO*/\r\n\r\n.logo-font {\r\n  margin-top: 10px;\r\n  font-size: 2em;\r\n  font-family: Futura, \"Trebuchet MS\", Arial, sans-serif;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaWVudEFwcC9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUF5QjtFQUN6QixrQkFBa0I7RUFDbEIsTUFBTTtFQUNOLE9BQU87RUFDUCxRQUFRO0VBQ1IsU0FBUztBQUNYOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsdUJBQXVCO0VBQ3ZCLGVBQWU7RUFDZiwyQkFBMkI7RUFDM0IsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsV0FBVztFQUNYLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLDJCQUEyQjtFQUMzQiw4QkFBOEI7QUFDaEM7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUU7SUFDRSxXQUFXO0lBQ1gseUJBQXlCO0VBQzNCOztBQUVGO0VBQ0UsV0FBVztFQUNYLGVBQWU7RUFDZix5QkFBeUI7RUFDekIsc0JBQXNCO0VBQ3RCLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxXQUFXO0VBQ1gsMkJBQTJCO0VBQzNCLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCw2QkFBNkI7RUFDN0IsNEJBQTRCO0VBQzVCLHlCQUF5QjtFQUN6QixnQkFBZ0I7RUFDaEIsd0VBQXdFO0FBQzFFOztBQUVBO0VBRUUsYUFBYTtFQUViLG1CQUFtQjtFQUNuQixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLHlCQUF5QjtFQUN6Qix5QkFBeUI7RUFDekIsZ0JBQWdCO0FBQ2xCOztBQUVBLE9BQU87O0FBRVA7RUFDRSxnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLHNEQUFzRDtBQUN4RCIsImZpbGUiOiJDbGllbnRBcHAvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFpbi1iZyB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzIxMjMyNTtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG59XHJcblxyXG4uY2FyZCB7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgIzk5OTk5OTtcclxufVxyXG5cclxuLmNhcmQtbG9naW4ge1xyXG4gIG1hcmdpbi10b3A6IDEzMHB4O1xyXG4gIHBhZGRpbmc6IDE4cHg7XHJcbiAgbWF4LXdpZHRoOiAzMHJlbTtcclxufVxyXG5cclxuLmNhcmQtaGVhZGVyIHtcclxuICBjb2xvcjogI2ZmZjtcclxuICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbiAgZm9udC13ZWlnaHQ6IDYwMCAhaW1wb3J0YW50O1xyXG4gIG1hcmdpbi10b3A6IDEwcHg7XHJcbiAgYm9yZGVyLWJvdHRvbTogMDtcclxufVxyXG5cclxuLmlucHV0LWdyb3VwLXByZXBlbmQgc3BhbiB7XHJcbiAgd2lkdGg6IDUwcHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzJkMmQyZDtcclxuICBjb2xvcjogI2ZmZjtcclxuICBib3JkZXI6IDAgIWltcG9ydGFudDtcclxufVxyXG5cclxuaW5wdXQ6Zm9jdXMge1xyXG4gIG91dGxpbmU6IDAgMCAwIDAgIWltcG9ydGFudDtcclxuICBib3gtc2hhZG93OiAwIDAgMCAwICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5sb2dpbl9idG4ge1xyXG4gIHdpZHRoOiAxMzBweDtcclxufVxyXG5cclxuICAubG9naW5fYnRuOmhvdmVyIHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmMDAwMDtcclxuICB9XHJcblxyXG4uYnRuLW91dGxpbmUtZGFuZ2VyIHtcclxuICBjb2xvcjogI2ZmZjtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzJkMmQyZDtcclxuICBiYWNrZ3JvdW5kLWltYWdlOiBub25lO1xyXG4gIGJvcmRlci1jb2xvcjogIzJkMmQyZDtcclxufVxyXG5cclxuLmZvcm0tY29udHJvbCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiBjYWxjKDIuMjVyZW0gKyAycHgpO1xyXG4gIHBhZGRpbmc6IDAuMzc1cmVtIDAuNzVyZW07XHJcbiAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgbGluZS1oZWlnaHQ6IDEuNjtcclxuICBjb2xvcjogI2ZmZmZmZjtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcclxuICBiYWNrZ3JvdW5kLWNsaXA6IHBhZGRpbmctYm94O1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICM2NjY2NjY7XHJcbiAgYm9yZGVyLXJhZGl1czogMDtcclxuICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC4xNXMgZWFzZS1pbi1vdXQsIGJveC1zaGFkb3cgMC4xNXMgZWFzZS1pbi1vdXQ7XHJcbn1cclxuXHJcbi5pbnB1dC1ncm91cC10ZXh0IHtcclxuICBkaXNwbGF5OiAtbXMtZmxleGJveDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIC1tcy1mbGV4LWFsaWduOiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBwYWRkaW5nOiAwIDAgMCAxcmVtO1xyXG4gIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgZm9udC1zaXplOiAxLjVyZW07XHJcbiAgZm9udC13ZWlnaHQ6IDcwMDtcclxuICBsaW5lLWhlaWdodDogMS42O1xyXG4gIGNvbG9yOiAjNDk1MDU3O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNlOWVjZWY7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2NlZDRkYTtcclxuICBib3JkZXItcmFkaXVzOiAwO1xyXG59XHJcblxyXG4vKkxPR08qL1xyXG5cclxuLmxvZ28tZm9udCB7XHJcbiAgbWFyZ2luLXRvcDogMTBweDtcclxuICBmb250LXNpemU6IDJlbTtcclxuICBmb250LWZhbWlseTogRnV0dXJhLCBcIlRyZWJ1Y2hldCBNU1wiLCBBcmlhbCwgc2Fucy1zZXJpZjtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -672,6 +678,8 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatFormFieldModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSelectModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBadgeModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatChipsModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"]
         ],
         exports: [
@@ -686,6 +694,8 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatFormFieldModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSelectModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBadgeModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatChipsModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"]
         ]
     })
@@ -796,6 +806,92 @@ const tickerTabRoutes = [
     { path: 'dashboard/ticker/:id/general', component: _ticker_general_general_component__WEBPACK_IMPORTED_MODULE_0__["GeneralComponent"] },
     { path: 'dashboard/ticker/:id/raw-data', component: _ticker_raw_data_raw_data_component__WEBPACK_IMPORTED_MODULE_1__["RawDataComponent"] },
 ];
+
+
+/***/ }),
+
+/***/ "./ClientApp/app/ticker/chart/chart.component.ts":
+/*!*******************************************************!*\
+  !*** ./ClientApp/app/ticker/chart/chart.component.ts ***!
+  \*******************************************************/
+/*! exports provided: ChartComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartComponent", function() { return ChartComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let ChartComponent = class ChartComponent {
+};
+ChartComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'chart',
+        template: __webpack_require__(/*! raw-loader!./chart.component.html */ "./node_modules/raw-loader/index.js!./ClientApp/app/ticker/chart/chart.component.html")
+    })
+], ChartComponent);
+
+
+
+/***/ }),
+
+/***/ "./ClientApp/app/ticker/company-info/company-info.component.ts":
+/*!*********************************************************************!*\
+  !*** ./ClientApp/app/ticker/company-info/company-info.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: CompanyInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompanyInfo", function() { return CompanyInfo; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _shared_DataService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/DataService */ "./ClientApp/app/shared/DataService.ts");
+
+
+
+
+let CompanyInfo = class CompanyInfo {
+    constructor(data, route) {
+        this.data = data;
+        this.route = route;
+        this.title = 'Ticker';
+        this.selected = 'option2';
+        this.companyExists = false;
+    }
+    ngOnInit() {
+        //GET ID FROM URL
+        this.route.params
+            .subscribe((params) => {
+            this.tickerId = +params['id'];
+        });
+        //GET TICKER BY ID
+        this.data.getTicker(this.tickerId)
+            .subscribe(success => {
+            if (success) {
+                this.ticker = this.data.ticker;
+                if (this.data.ticker.company.companyName !== null) {
+                    this.companyExists = true;
+                }
+            }
+        });
+    }
+};
+CompanyInfo.ctorParameters = () => [
+    { type: _shared_DataService__WEBPACK_IMPORTED_MODULE_3__["DataService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+];
+CompanyInfo = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'company-info',
+        template: __webpack_require__(/*! raw-loader!./company-info.component.html */ "./node_modules/raw-loader/index.js!./ClientApp/app/ticker/company-info/company-info.component.html")
+    })
+], CompanyInfo);
+
 
 
 /***/ }),
@@ -918,7 +1014,7 @@ TimeFrameAnalysis = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n  width: 100%;\n}\n\n.mat-form-field {\n  font-size: 14px;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaWVudEFwcC9hcHAvdGlja2VyL3Jhdy1kYXRhL0M6XFxVc2Vyc1xcZWxpc3RcXFByb2plY3RzXFxNaWRhcy9DbGllbnRBcHBcXGFwcFxcdGlja2VyXFxyYXctZGF0YVxccmF3LWRhdGEuY29tcG9uZW50LnNjc3MiLCJDbGllbnRBcHAvYXBwL3RpY2tlci9yYXctZGF0YS9yYXctZGF0YS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQUE7QUNDSjs7QURDQTtFQUNJLGVBQUE7RUFDQSxXQUFBO0FDRUoiLCJmaWxlIjoiQ2xpZW50QXBwL2FwcC90aWNrZXIvcmF3LWRhdGEvcmF3LWRhdGEuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG4ubWF0LWZvcm0tZmllbGQge1xyXG4gICAgZm9udC1zaXplOiAxNHB4O1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuIiwidGFibGUge1xuICB3aWR0aDogMTAwJTtcbn1cblxuLm1hdC1mb3JtLWZpZWxkIHtcbiAgZm9udC1zaXplOiAxNHB4O1xuICB3aWR0aDogMTAwJTtcbn0iXX0= */"
+module.exports = "table {\n  width: 100%;\n}\n\n.mat-form-field {\n  font-size: 14px;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaWVudEFwcC9hcHAvdGlja2VyL3Jhdy1kYXRhL0Q6XFxQcm9qZWN0c1xcTWlkYXMvQ2xpZW50QXBwXFxhcHBcXHRpY2tlclxccmF3LWRhdGFcXHJhdy1kYXRhLmNvbXBvbmVudC5zY3NzIiwiQ2xpZW50QXBwL2FwcC90aWNrZXIvcmF3LWRhdGEvcmF3LWRhdGEuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFBO0FDQ0o7O0FEQ0E7RUFDSSxlQUFBO0VBQ0EsV0FBQTtBQ0VKIiwiZmlsZSI6IkNsaWVudEFwcC9hcHAvdGlja2VyL3Jhdy1kYXRhL3Jhdy1kYXRhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuLm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIGZvbnQtc2l6ZTogMTRweDtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcbiIsInRhYmxlIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5tYXQtZm9ybS1maWVsZCB7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgd2lkdGg6IDEwMCU7XG59Il19 */"
 
 /***/ }),
 
@@ -1193,7 +1289,7 @@ module.exports = "<h1>Counter</h1>\r\n\r\n<p>This is a simple example of an Angu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n    <div class=\"pb-2 mb-3 border-bottom\">\r\n        <h2 class=\"h2\">Dashboard</h2>\r\n        <breadcrumb></breadcrumb>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-4\">\r\n            <stock-list-widget></stock-list-widget>\r\n        </div>\r\n        <div class=\"col-lg-4\">\r\n            <favorite-tickers></favorite-tickers>\r\n        </div>\r\n    </div>\r\n\r\n</main>\r\n"
+module.exports = "<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n    <div class=\"pb-2 mb-3 border-bottom\">\r\n        <h2 class=\"h2\">Dashboard</h2>\r\n        <breadcrumb></breadcrumb>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-4\">\r\n            <stock-list-widget></stock-list-widget>\r\n        </div>\r\n        <div class=\"col-lg-4\">\r\n            <favorite-tickers></favorite-tickers>\r\n        </div>\r\n    </div>\r\n\r\n</main>\r\n"
 
 /***/ }),
 
@@ -1270,7 +1366,7 @@ module.exports = "<div class=\"main-bg\">\r\n  <div class=\"bg-general\">\r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0\">\r\n  <a class=\"navbar-brand col-sm-3 col-md-2 mr-0\" href=\"#\">MIDAS</a>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <!--Notifications Here-->\r\n    </div>\r\n    <div class=\"col-lg-12\">\r\n\r\n        <mat-menu #appMenu=\"matMenu\">\r\n            <a href=\"dashboard/settings\">\r\n            <button mat-menu-item>\r\n                <mat-icon>settings</mat-icon>\r\n                Settings</button>\r\n            </a>\r\n            <hr />\r\n            <button mat-menu-item>\r\n                <mat-icon>logout</mat-icon>\r\n                Logout\r\n            </button>\r\n        </mat-menu>\r\n\r\n        <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\r\n            <mat-icon style=\"color: white;\">more_vert</mat-icon>\r\n        </button>\r\n\r\n    </div>\r\n  </div>\r\n\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0\">\r\n    <a class=\"navbar-brand col-sm-3 col-md-2 mr-0\" href=\"#\">MIDAS</a>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n            <a href=\"#\">\r\n                <mat-icon matBadge=\"15\" matBadgePosition=\"below after\" class=\"white-icon m-1\">error</mat-icon>\r\n            </a>\r\n        </div>\r\n        <div class=\"col-lg-6\">\r\n            <mat-menu #appMenu=\"matMenu\">\r\n                <a href=\"dashboard/settings\">\r\n                    <button mat-menu-item>\r\n                        <mat-icon>settings</mat-icon>\r\n                        Settings\r\n                    </button>\r\n                </a>\r\n                <hr />\r\n                <button mat-menu-item>\r\n                    <mat-icon>logout</mat-icon>\r\n                    Logout\r\n                </button>\r\n            </mat-menu>\r\n\r\n            <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\r\n                <mat-icon style=\"color: white;\">more_vert</mat-icon>\r\n            </button>\r\n        </div>\r\n    </div>\r\n\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1281,7 +1377,7 @@ module.exports = "<nav class=\"navbar navbar-dark sticky-top bg-dark flex-md-now
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Settings</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n            <!--TODO INSERT SETTINGS-->\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Settings</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-6\">\r\n                <mat-card class=\"ticker-count-card\">\r\n                    <mat-card-header>\r\n                        <div mat-card-avatar class=\"example-header-image\"></div>\r\n                        <mat-card-title>Tickers Table</mat-card-title>\r\n                        <mat-card-subtitle>Data from the \"Tickers\" table</mat-card-subtitle>\r\n                    </mat-card-header>\r\n                    <mat-card-content>\r\n                        <table class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th scope=\"col\">Type</th>\r\n                                    <th scope=\"col\">#</th>\r\n                                    <th scope=\"col\">Last Updated</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td><h5>Stock</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td><h5>ETFs</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td><h5>Mutual Funds</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </mat-card-content>\r\n                </mat-card>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-lg-6\">\r\n                <mat-card class=\"ticker-count-card\">\r\n                    <mat-card-header>\r\n                        <div mat-card-avatar class=\"example-header-image\"></div>\r\n                        <mat-card-title>Exchange Table</mat-card-title>\r\n                        <mat-card-subtitle>Data from \"Tickers\" by Exchange</mat-card-subtitle>\r\n                    </mat-card-header>\r\n                    <mat-card-content>\r\n                        <table class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th scope=\"col\">Type</th>\r\n                                    <th scope=\"col\">#</th>\r\n                                    <th scope=\"col\">Last Updated</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td><h5>NASDAQ</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td><h5>RUSSEL 500</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td><h5>SPIDER 500</h5></td>\r\n                                    <td>1,234</td>\r\n                                    <td>Dec. 19, 2019</td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </mat-card-content>\r\n                </mat-card>\r\n\r\n            </div>\r\n\r\n        </div>\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1304,6 +1400,28 @@ module.exports = "<nav class=\"col-md-2 d-none d-md-block bg-light sidebar\">\r\
 /***/ (function(module, exports) {
 
 module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n            <h1>Ticker List</h1>\r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <time-export></time-export>\r\n        <br/>\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-hover table-striped table-sm\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>ID</th>\r\n                        <th>Ticker</th>\r\n                        <th>Price Currency</th>\r\n                        <th>Exchange</th>\r\n\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr>\r\n                        <td>53459</td>\r\n                        <td><a href=\"dashboard/ticker/53459\"><span class=\"badge badge-success\">AAPL</span></a></td>\r\n                        <td>USD</td>\r\n                        <td>NASDAQ</td>\r\n                    </tr>\r\n                    <tr *ngFor=\"let t of tickers\" >\r\n                        <td>{{t.id}}</td>\r\n                        <td><a href=\"dashboard/ticker/{{t.id}}\"><span class=\"badge badge-success\">{{t.ticker}}</span></a></td>\r\n                        <td>{{t.priceCurrency}}</td>\r\n                        <td>{{t.exchange}}</td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n\r\n    </main>\r\n</div>\r\n\r\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./ClientApp/app/ticker/chart/chart.component.html":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./ClientApp/app/ticker/chart/chart.component.html ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Chart Test</h1>\r\n\r\n<script>\r\n    candlestickChart();\r\n\r\n    function getDataPointsFromCSV(csv) {\r\n        var csvLines = points = [];\r\n        csvLines = csv.split(/[\\r?\\n|\\r|\\n]+/);\r\n        for (var i = 0; i < csvLines.length; i++) {\r\n            if (csvLines[i].length > 0) {\r\n                points = csvLines[i].split(\",\");\r\n                dataPoints.push({\r\n                    x: new Date(\r\n                        parseInt(points[0].split(\"-\")[0]),\r\n                        parseInt(points[0].split(\"-\")[1]),\r\n                        parseInt(points[0].split(\"-\")[2])\r\n                    ),\r\n                    y: [\r\n                        parseFloat(points[1]),\r\n                        parseFloat(points[2]),\r\n                        parseFloat(points[3]),\r\n                        parseFloat(points[4])\r\n                    ]\r\n                });\r\n            }\r\n        }\r\n        chart.render();\r\n    }\r\n\r\n    $.get(\"netflix-stock-price.csv\", getDataPointsFromCSV);\r\n</script>\r\n\r\n<div id=\"chartContainer\" style=\"height: 300px; width: 100%;\"></div>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./ClientApp/app/ticker/company-info/company-info.component.html":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./ClientApp/app/ticker/company-info/company-info.component.html ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-card class=\"company-info-card\">\r\n    <mat-card-content>\r\n\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12\">\r\n                <h3>{{ticker.company.companyName}}</h3>\r\n                {{ticker.company.description}}\r\n            </div>\r\n        </div>\r\n        <br/>\r\n        <br/>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-6\">\r\n\r\n                <table class=\"table table-striped\">\r\n                    <tbody>\r\n                        <tr>\r\n                            <td><b>Symbol</b></td>\r\n                            <td>{{ticker.company.symbol}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Security Name</b></td>\r\n                            <td>{{ticker.company.securityName}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Exchange</b></td>\r\n                            <td>{{ticker.company.exchange}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Industry</b></td>\r\n                            <td>{{ticker.company.industry}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Sector</b></td>\r\n                            <td>{{ticker.company.sector}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Primary SIC Code</b></td>\r\n                            <td>{{ticker.company.primarySicCode}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Issue Type</b></td>\r\n                            <td>{{ticker.company.issueType}}</td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n            <div class=\"col-lg-6\">\r\n                <table class=\"table table-striped\">\r\n                    <tbody>\r\n                        <tr>\r\n                            <td><b>CEO</b></td>\r\n                            <td>{{ticker.company.ceo}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Number of Employees</b></td>\r\n                            <td>{{ticker.company.employees | number}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Address</b></td>\r\n                            <td>\r\n                                {{ticker.company.address}}\r\n                                <br />\r\n                                {{ticker.company?.address2}}\r\n                                <br />\r\n                                {{ticker.company?.state}}\r\n                                <br />\r\n                                {{ticker.company?.city}}\r\n                                <br />\r\n                                {{ticker.company?.zip}}\r\n                                <br />\r\n                                {{ticker.company?.country}}\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Phone</b></td>\r\n                            <td>{{ticker.company.phone}}</td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td><b>Website</b></td>\r\n                            <td><a target=\"_blank\" href=\"{{ticker.company.website}}\">{{ticker.company.website}}</a></td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n                \r\n            </div>\r\n        </div>\r\n\r\n\r\n\r\n    </mat-card-content>\r\n</mat-card>"
 
 /***/ }),
 
@@ -1369,7 +1487,7 @@ module.exports = "<mat-form-field>\r\n    <input matInput (keyup)=\"applyFilter(
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n\r\n            <div class=\"container-fluid\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-9\">\r\n                        <!--TICKER NAME-->\r\n                        <div *ngIf=\"this.companyExists; then thenBlock else elseBlock\"></div>\r\n                        <ng-template #thenBlock><h1>{{ticker.company?.companyName}}</h1></ng-template>\r\n                        <ng-template #elseBlock><h1>[No Name]</h1></ng-template>\r\n\r\n                        <!--TICKER SYMBOL-->\r\n                        <h5>({{ticker?.ticker}})</h5>\r\n                        <p>Type: {{ticker?.assetType}}</p>\r\n                    </div>\r\n\r\n                    <div class=\"col-lg-3\">\r\n                        <mat-form-field>\r\n                            <mat-label>Timeframe</mat-label>\r\n                            <mat-select [(value)]=\"selected\">\r\n                                <mat-option>None</mat-option>\r\n                                <mat-option value=\"30days\">30 Days</mat-option>\r\n                                <mat-option value=\"60days\">60 Days</mat-option>\r\n                                <mat-option value=\"90days\">90 Days</mat-option>\r\n                                <mat-option value=\"120days\">120 Days</mat-option>\r\n                                <mat-option value=\"150days\">150 Days</mat-option>\r\n                                <mat-option value=\"180days\">180 Days</mat-option>\r\n                            </mat-select>\r\n                        </mat-form-field>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <mat-tab-group>\r\n\r\n            <!--GENERAL-->\r\n            <mat-tab label=\"General\">\r\n                <br />\r\n                <general></general>\r\n            </mat-tab>\r\n\r\n            <mat-tab label=\"Chart\"> Chart </mat-tab>\r\n            <mat-tab label=\"S&R\"> S&R </mat-tab>\r\n            <mat-tab label=\"Trade Plan\"> Trade Plan </mat-tab>\r\n            <mat-tab label=\"Journal\"> Journal </mat-tab>\r\n\r\n            <!--RAW DATA-->\r\n            <mat-tab label=\"Raw Data\">\r\n                <br />\r\n                <raw-data></raw-data>\r\n            </mat-tab>\r\n\r\n        </mat-tab-group>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
+module.exports = "<app-nav-menu></app-nav-menu>\r\n<div class=\"container-fluid\">\r\n    <sidebar-nav></sidebar-nav>\r\n    <main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 pt-3 px-4\">\r\n        <div class=\"pb-2 mb-3 border-bottom\">\r\n\r\n            <div class=\"container-fluid\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-9\">\r\n                        <!--TICKER NAME-->\r\n                        <div *ngIf=\"this.companyExists; then thenBlock else elseBlock\"></div>\r\n                        <ng-template #thenBlock><h1>{{ticker.company?.companyName}}</h1></ng-template>\r\n                        <ng-template #elseBlock><h1>[No Name]</h1></ng-template>\r\n\r\n                        <!--TICKER SYMBOL-->\r\n                        <h5>({{ticker?.ticker}})</h5>\r\n                        <p>Type: {{ticker?.assetType}}</p>\r\n                    </div>\r\n\r\n                    <div class=\"col-lg-3\">\r\n                        <mat-form-field>\r\n                            <mat-label>Timeframe</mat-label>\r\n                            <mat-select [(value)]=\"selected\">\r\n                                <mat-option>None</mat-option>\r\n                                <mat-option value=\"30days\">30 Days</mat-option>\r\n                                <mat-option value=\"60days\">60 Days</mat-option>\r\n                                <mat-option value=\"90days\">90 Days</mat-option>\r\n                                <mat-option value=\"120days\">120 Days</mat-option>\r\n                                <mat-option value=\"150days\">150 Days</mat-option>\r\n                                <mat-option value=\"180days\">180 Days</mat-option>\r\n                            </mat-select>\r\n                        </mat-form-field>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n            <breadcrumb></breadcrumb>\r\n        </div>\r\n\r\n        <mat-tab-group>\r\n\r\n            <!--GENERAL-->\r\n            <mat-tab label=\"General\">\r\n                <br />\r\n                <general></general>\r\n            </mat-tab>\r\n\r\n            <mat-tab label=\"Chart\"> <chart></chart> </mat-tab>\r\n            <mat-tab label=\"S&R\"> S&R </mat-tab>\r\n            <mat-tab label=\"Trade Plan\"> Trade Plan </mat-tab>\r\n            <mat-tab label=\"Company Info\">\r\n                <br />\r\n                <company-info></company-info>\r\n            </mat-tab>\r\n\r\n            <!--RAW DATA-->\r\n            <mat-tab label=\"Raw Data\">\r\n                <br />\r\n                <raw-data></raw-data>\r\n            </mat-tab>\r\n\r\n        </mat-tab-group>\r\n\r\n    </main>\r\n</div>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1391,7 +1509,7 @@ module.exports = "<div class=\"btn-toolbar mb-2 mb-md-0 float-right\">\r\n  <div
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\elist\Projects\Midas\ClientApp\main.ts */"./ClientApp/main.ts");
+module.exports = __webpack_require__(/*! D:\Projects\Midas\ClientApp\main.ts */"./ClientApp/main.ts");
 
 
 /***/ })
