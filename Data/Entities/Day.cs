@@ -44,5 +44,29 @@ namespace Midas.Data.Entities
             return days;
 
         }
+
+        public static List<Day> DaysForward(int daysForward)
+        {
+            daysForward++;
+            var thru = DateTime.Today.AddDays(daysForward);
+
+            List<Day> days = new List<Day>();
+
+            for (var day = DateTime.Today; day.Date <= thru.Date; thru = thru.AddDays(-1))
+            {
+                var dayObj = new Day();
+
+                dayObj.Date = thru;
+                dayObj.day = thru.Day;
+                dayObj.month = thru.Month;
+                dayObj.year = thru.Year;
+
+                days.Add(dayObj);
+
+            }
+
+            return days;
+
+        }
     }
 }

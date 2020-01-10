@@ -38,7 +38,17 @@ namespace Midas.Data
         public List<Day> GetAllDays()
         {
             return _ctx.Days
-                    .ToList();
+                .OrderBy(d => d.Date)
+                .ToList();
+        }
+
+        public List<Day> GetDaysByMonthAndYear(int month, int year)
+        {
+            return _ctx.Days
+                .OrderBy(d => d.Date)
+                .Where(d => (d.month == month) &&
+                (d.year == year))
+                .ToList();
         }
 
         public Day CreateNewDay(DateTimeOffset Date)
@@ -61,91 +71,12 @@ namespace Midas.Data
 
                 return day;
             }
-            else 
+            else
             {
                 return dayCheck;
             }
 
         }
 
-        public OptionCycleDate CreateOptionCycleOpens(Day day, int monthsBack)
-        {
-            var ocCheck = _ctx.OptionCycleDates
-                    .Where(o => o.DayId == day.id)
-                    .FirstOrDefault();
-
-            if (ocCheck == null && day.Date.IsThirdMondayOfMonth())
-            {
-
-                var optionCycle = new OptionCycleDate();
-
-                for (int i = monthsBack; i > 0; i--)
-                {
-
-                    optionCycle.DayId = day.id;
-                    optionCycle.Date = day.Date;
-
-                    if (i == 12)
-                    {
-                        optionCycle.Open12Month = day.Date;
-                    }
-                    else if (i == 11)
-                    {
-                        optionCycle.Open11Month = day.Date;
-                    }
-                    else if (i == 10)
-                    {
-                        optionCycle.Open10Month = day.Date;
-                    }
-                    else if (i == 9)
-                    {
-                        optionCycle.Open9Month = day.Date;
-                    }
-                    else if (i == 8)
-                    {
-                        optionCycle.Open8Month = day.Date;
-                    }
-                    else if (i == 7)
-                    {
-                        optionCycle.Open7Month = day.Date;
-                    }
-                    else if (i == 6)
-                    {
-                        optionCycle.Open6Month = day.Date;
-                    }
-                    else if (i == 5)
-                    {
-                        optionCycle.Open5Month = day.Date;
-                    }
-                    else if (i == 4)
-                    {
-                        optionCycle.Open4Month = day.Date;
-                    }
-                    else if (i == 3)
-                    {
-                        optionCycle.Open3Month = day.Date;
-                    }
-                    else if (i == 2)
-                    {
-                        optionCycle.Open2Month = day.Date;
-                    }
-                    else if (i == 1)
-                    {
-                        optionCycle.Open1Month = day.Date;
-                    }
-
-                    _ctx.Add(optionCycle);
-                    _ctx.SaveChanges();
-
-                    day.Date.AddMonths(-i);
-
-                }
-                return optionCycle;
-            }
-            else 
-            {
-                return ocCheck;
-            }
-        }
     }
 }

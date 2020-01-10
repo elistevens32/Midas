@@ -25,6 +25,7 @@ namespace Midas.Services
         private readonly IWebHostEnvironment _hosting;
         private readonly UserManager<MidasUser> _userManager;
         private readonly IDayRepository _dayRepository;
+        private readonly IOptionCycleDateRepository _optionCycleDateRepository;
         private readonly ITickerRepository _tickerRepo;
         private readonly IEodRepository _eodRepo;
         private readonly IMidasRepository _repository;
@@ -34,6 +35,7 @@ namespace Midas.Services
             IWebHostEnvironment hosting,
             UserManager<MidasUser> userManager,
             IDayRepository dayRepository,
+            IOptionCycleDateRepository optionCycleDateRepository,
             ITickerRepository tickerRepo,
             IEodRepository EodRepo,
             IMidasRepository repository,
@@ -43,6 +45,7 @@ namespace Midas.Services
             _hosting = hosting;
             _userManager = userManager;
             _dayRepository = dayRepository;
+            _optionCycleDateRepository = optionCycleDateRepository;
             _tickerRepo = tickerRepo;
             _eodRepo = EodRepo;
             _repository = repository;
@@ -66,8 +69,14 @@ namespace Midas.Services
                 // SEED COMPANIES
                 seeder.SeedCompanies();
 
+                // SEED OPTIONS CYCLES OPEN MONTHS
+                seeder.SeedOptionCycleMonths();
+
+                // SEED OPTIONS CYCLES CLOSE MONTHS
+                seeder.SeedOptionCycleCloseMonths();
+
                 // SEED OPTIONS CYCLES
-                //seeder.SeedOptionCycles();
+                seeder.SeedOptionCycles();
 
                 // IEX TICKER SEED
                 //seeder.SeedIexTickers().Wait();
@@ -142,9 +151,93 @@ namespace Midas.Services
             }
         }
 
+        private void SeedOptionCycleMonths()
+        {
+
+            _ctx.Database.EnsureCreated();
+
+            //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [OptionCycleMonths]");
+
+            var monthsBack = 0;
+            if (DevelopmentEnvironment.getEnvironment()) { monthsBack = DevelopmentEnvironment.devMonthsBack; } else { monthsBack = DevelopmentEnvironment.prodMonthsBack; }
+
+            if (!_ctx.OptionCycleMonths.Any())
+            {
+                var nextMonth = DateTime.Today.AddMonths(12);
+
+                for (int i = monthsBack; i > 0; i--)
+                {
+                    var monthDate = nextMonth.AddMonths(-i);
+
+                    var monthDaysList = _dayRepository.GetDaysByMonthAndYear(monthDate.Month, monthDate.Year);
+
+                    foreach (var monthDay in monthDaysList)
+                    {
+
+                        if (monthDay.Date.IsThirdMondayOfMonth() == true)
+                        {
+                            var optionCycleMonth = new OptionCycleMonth();
+                            optionCycleMonth.Date = monthDay.Date;
+                            optionCycleMonth.Year = monthDay.year;
+                            optionCycleMonth.Month = monthDay.month;
+
+                            _ctx.OptionCycleMonths.Add(optionCycleMonth);
+                            _ctx.SaveChanges();
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
+        private void SeedOptionCycleCloseMonths()
+        {
+
+            _ctx.Database.EnsureCreated();
+
+            //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [OptionCycleCloseMonths]");
+
+            var monthsBack = 0;
+            if (DevelopmentEnvironment.getEnvironment()) { monthsBack = DevelopmentEnvironment.devMonthsBack; } else { monthsBack = DevelopmentEnvironment.prodMonthsBack; }
+
+            if (!_ctx.OptionCycleCloseMonths.Any())
+            {
+                var nextMonth = DateTime.Today.AddMonths(12);
+
+                for (int i = monthsBack; i > 0; i--)
+                {
+                    var monthDate = nextMonth.AddMonths(-i);
+
+                    var thirdFridayNumber = DateTimeExtensions.DayFinder.FindDay(monthDate.Year, monthDate.Month, DayOfWeek.Friday, 3);
+
+                    var date = new DateTime(monthDate.Year, monthDate.Month, thirdFridayNumber);
+                    var thirdFridayDay = _dayRepository.GetDayByDate(date);
+
+                    if (thirdFridayDay != null)
+                    {
+                        var optionCycleCloseMonth = new OptionCycleCloseMonth();
+                        optionCycleCloseMonth.CloseDate = thirdFridayDay.Date;
+                        optionCycleCloseMonth.Year = thirdFridayDay.year;
+                        optionCycleCloseMonth.Month = thirdFridayDay.month;
+
+                        _ctx.OptionCycleCloseMonths.Add(optionCycleCloseMonth);
+                        _ctx.SaveChanges();
+                    }
+                }
+            }
+
+
+        }
+
         private void SeedOptionCycles()
         {
             _ctx.Database.EnsureCreated();
+
+            //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [OptionCycleDates]");
 
             var monthsBack = 12;
 
@@ -152,7 +245,7 @@ namespace Midas.Services
 
             foreach (var day in daysList)
             {
-                _dayRepository.CreateOptionCycleOpens(day, monthsBack);
+                _optionCycleDateRepository.CreateOptionCycleOpens(day, monthsBack);
             }
         }
 
@@ -160,13 +253,23 @@ namespace Midas.Services
         {
             _ctx.Database.EnsureCreated();
 
+            //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [Days]");
+
             var daysBack = 0;
 
-            if (DevelopmentEnvironment.getEnvironment()) { daysBack = 365; } else { daysBack = 3650; }
+            if (DevelopmentEnvironment.getEnvironment()) { daysBack = 380; } else { daysBack = 750; }
 
-            var daysList = Day.DaysBack(daysBack);
+            var daysBackList = Day.DaysBack(daysBack);
+            var daysForwardList = Day.DaysForward(daysBack);
 
-            foreach (var day in daysList)
+            //BACK
+            foreach (var day in daysBackList)
+            {
+                _dayRepository.CreateNewDay(day.Date);
+            }
+
+            //FORWARD
+            foreach (var day in daysForwardList)
             {
                 _dayRepository.CreateNewDay(day.Date);
             }
@@ -255,78 +358,7 @@ namespace Midas.Services
 
         }
 
-        private void SeedIexEndOfDays(int daysBack)
-        {
-            _ctx.Database.EnsureCreated();
-
-            // DAYS LIST
-            var daysList = Day.DaysBack(180);
-
-            // TICKER LIST
-            var tickerList = _tickerRepo.GetTickersTiingo(10);
-
-            foreach (var ticker in tickerList)
-            {
-
-                foreach (var day in daysList)
-                {
-                    //var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
-
-                    //if (EodItem.AdjOpen != 0)
-                    //{
-                    //    var formattedDate = String.Format("{0:yyyyMMdd}", day.Date);
-
-                    //    var requestString = $"{ApiTokens.iex_sandbox_domain}{ApiTokens.iex_historical_day_p1}{ticker.ticker}{ApiTokens.iex_historical_day_p2}{formattedDate}?chartByDay=true&token={ApiTokens.test_iex_public_token}";
-
-                    //    try
-                    //    {
-                    //        using (WebClient webClient = new WebClient())
-                    //        {
-                    //            webClient.BaseAddress = ApiTokens.tiingo_production;
-                    //            var json = webClient.DownloadString(requestString);
-                    //            var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
-
-                    //            if (eodList.Count == 0)
-                    //            {
-                    //                var emptyEod = new EOD();
-                    //                emptyEod.IexBool = true;
-                    //                emptyEod.TickerId = ticker.id;
-                    //                emptyEod.DayId = day.id;
-                    //                emptyEod.Open = 0.00;
-                    //                emptyEod.High = 0.00;
-                    //                emptyEod.Low = 0.00;
-                    //                emptyEod.Close = 0.00;
-                    //                emptyEod.Volume = 0;
-
-                    //                _ctx.EODs.Add(emptyEod);
-                    //                _ctx.SaveChanges();
-                    //            }
-                    //            else
-                    //            {
-                    //                foreach (var item in eodList)
-                    //                {
-                    //                    item.TickerId = ticker.id;
-                    //                    item.DayId = day.id;
-                    //                    item.IexBool = true;
-
-                    //                    _ctx.EODs.Add(item);
-                    //                    _ctx.SaveChanges();
-                    //                }
-                    //            }
-
-                    //        }
-                    //    }
-                    //    catch (WebException ex)
-                    //    {
-                    //        throw ex;
-                    //    }
-                    //}
-
-                }
-
-            }
-        }
-        // IEX - END
+        
 
         // TIINGO - START
         private void SeedTiingoEndOfDays(int daysBack)

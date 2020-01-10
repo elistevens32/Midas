@@ -41,6 +41,7 @@ export class RawDataComponent implements OnInit {
         this.data.getEODByTickerId(this.tickerId)
             .subscribe(success => {
                 if (success) {
+                    console.log("Test: " + this.eodData);
                     this.eodData = this.data.eods;
                     this.dataSource = new MatTableDataSource<EOD>(this.eodData);
                     this.dataSource.sort = this.sort;

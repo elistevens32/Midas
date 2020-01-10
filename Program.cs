@@ -22,9 +22,16 @@ namespace Midas
                 // SEEDING DATA
                 MidasSeeder.RunSeeding(host);
 
+                // CHECK FOR UPDATES
+                UpdateService.CheckForUpdates(host);
+
                 // TEST DATA
-                TestDataSeeder.SeedTestData(host);
+                //TestDataSeeder.SeedTestData(host);
+
             }
+
+            // EOD POPULATE
+            EODPopulateService.RunEODPopulate(host);
 
             host.Run();
         }

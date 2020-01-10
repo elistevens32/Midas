@@ -10,7 +10,7 @@ using Midas;
 namespace Midas.Migrations
 {
     [DbContext(typeof(MidasContext))]
-    [Migration("20191220170416_InitialDb")]
+    [Migration("20200110200338_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,6 +148,12 @@ namespace Midas.Migrations
                     b.Property<long>("AdjVolume")
                         .HasColumnType("bigint");
 
+                    b.Property<double>("Change")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ChangePercent")
+                        .HasColumnType("float");
+
                     b.Property<double>("Close")
                         .HasColumnType("float");
 
@@ -196,6 +202,27 @@ namespace Midas.Migrations
                     b.ToTable("EODs");
                 });
 
+            modelBuilder.Entity("Midas.Data.Entities.OptionCycleCloseMonth", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CloseDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("OptionCycleCloseMonths");
+                });
+
             modelBuilder.Entity("Midas.Data.Entities.OptionCycleDate", b =>
                 {
                     b.Property<int>("id")
@@ -206,53 +233,72 @@ namespace Midas.Migrations
                     b.Property<DateTimeOffset>("CloseDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset>("Date")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<int>("CloseMonth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CloseYear")
+                        .HasColumnType("int");
 
                     b.Property<int>("DayId")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("Open10Month")
+                    b.Property<DateTimeOffset>("OpenDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset>("Open11Month")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<int>("OpenMonth")
+                        .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("Open12Month")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<int>("OpenYear")
+                        .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("Open1Month")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<int>("OptionCycleCloseMonthId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("Open2Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open3Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open4Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open5Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open6Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open7Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open8Month")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("Open9Month")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<int>("OptionCycleMonthId")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("DayId");
-
                     b.ToTable("OptionCycleDates");
+                });
+
+            modelBuilder.Entity("Midas.Data.Entities.OptionCycleMonth", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("OptionCycleMonths");
+                });
+
+            modelBuilder.Entity("Midas.Data.Entities.SystemSettings", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("averageDailyVolume")
+                        .HasColumnType("float");
+
+                    b.Property<double>("systemAverageDailyVolume")
+                        .HasColumnType("float");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("Midas.Data.Entities.Ticker", b =>
@@ -325,15 +371,6 @@ namespace Midas.Migrations
                     b.HasOne("Midas.Data.Entities.Ticker", "Ticker")
                         .WithMany()
                         .HasForeignKey("TickerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Midas.Data.Entities.OptionCycleDate", b =>
-                {
-                    b.HasOne("Midas.Data.Entities.Day", "Day")
-                        .WithMany()
-                        .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

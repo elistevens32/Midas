@@ -59,6 +59,71 @@ namespace Midas.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OptionCycleCloseMonths",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Month = table.Column<int>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    CloseDate = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OptionCycleCloseMonths", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OptionCycleDates",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DayId = table.Column<int>(nullable: false),
+                    OptionCycleMonthId = table.Column<int>(nullable: false),
+                    OpenDate = table.Column<DateTimeOffset>(nullable: false),
+                    OpenMonth = table.Column<int>(nullable: false),
+                    OpenYear = table.Column<int>(nullable: false),
+                    OptionCycleCloseMonthId = table.Column<int>(nullable: false),
+                    CloseDate = table.Column<DateTimeOffset>(nullable: false),
+                    CloseMonth = table.Column<int>(nullable: false),
+                    CloseYear = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OptionCycleDates", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OptionCycleMonths",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Month = table.Column<int>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OptionCycleMonths", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    averageDailyVolume = table.Column<double>(nullable: false),
+                    systemAverageDailyVolume = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickers",
                 columns: table => new
                 {
@@ -92,39 +157,6 @@ namespace Midas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OptionCycleDates",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DayId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTimeOffset>(nullable: false),
-                    CloseDate = table.Column<DateTimeOffset>(nullable: false),
-                    Open1Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open2Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open3Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open4Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open5Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open6Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open7Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open8Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open9Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open10Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open11Month = table.Column<DateTimeOffset>(nullable: false),
-                    Open12Month = table.Column<DateTimeOffset>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OptionCycleDates", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_OptionCycleDates_Days_DayId",
-                        column: x => x.DayId,
-                        principalTable: "Days",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EODs",
                 columns: table => new
                 {
@@ -146,6 +178,8 @@ namespace Midas.Migrations
                     AdjLow = table.Column<double>(nullable: false),
                     AdjOpen = table.Column<double>(nullable: false),
                     AdjVolume = table.Column<long>(nullable: false),
+                    Change = table.Column<double>(nullable: false),
+                    ChangePercent = table.Column<double>(nullable: false),
                     DivCash = table.Column<double>(nullable: false),
                     SplitFactor = table.Column<double>(nullable: false)
                 },
@@ -177,11 +211,6 @@ namespace Midas.Migrations
                 column: "TickerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OptionCycleDates_DayId",
-                table: "OptionCycleDates",
-                column: "DayId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tickers_CompanyId",
                 table: "Tickers",
                 column: "CompanyId");
@@ -193,13 +222,22 @@ namespace Midas.Migrations
                 name: "EODs");
 
             migrationBuilder.DropTable(
+                name: "OptionCycleCloseMonths");
+
+            migrationBuilder.DropTable(
                 name: "OptionCycleDates");
 
             migrationBuilder.DropTable(
-                name: "Tickers");
+                name: "OptionCycleMonths");
+
+            migrationBuilder.DropTable(
+                name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "Days");
+
+            migrationBuilder.DropTable(
+                name: "Tickers");
 
             migrationBuilder.DropTable(
                 name: "Companys");

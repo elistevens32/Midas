@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Midas.Data.Entities
 {
@@ -13,24 +14,22 @@ namespace Midas.Data.Entities
         [Key]
         public int id { get; set; }
 
+        [ForeignKey("day")]
         public int DayId { get; set; }
-        public Day Day { get; set; }
 
-        public DateTimeOffset Date { get; set; }
+        //OPEN
+        [ForeignKey("optioncyclemonth")]
+        public int OptionCycleMonthId { get; set; }
+        public DateTimeOffset OpenDate { get; set; }
+        public int OpenMonth { get; set; }
+        public int OpenYear { get; set; }
 
+        //CLOSE
+        [ForeignKey("optioncycleclosemonth")]
+        public int OptionCycleCloseMonthId { get; set; }
         public DateTimeOffset CloseDate { get; set; }
-        public DateTimeOffset Open1Month { get; set; }
-        public DateTimeOffset Open2Month { get; set; }
-        public DateTimeOffset Open3Month { get; set; }
-        public DateTimeOffset Open4Month { get; set; }
-        public DateTimeOffset Open5Month { get; set; }
-        public DateTimeOffset Open6Month { get; set; }
-        public DateTimeOffset Open7Month { get; set; }
-        public DateTimeOffset Open8Month { get; set; }
-        public DateTimeOffset Open9Month { get; set; }
-        public DateTimeOffset Open10Month { get; set; }
-        public DateTimeOffset Open11Month { get; set; }
-        public DateTimeOffset Open12Month { get; set; }
+        public int CloseMonth { get; set; }
+        public int CloseYear { get; set; }
 
     }
 }

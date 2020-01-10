@@ -30,6 +30,14 @@ namespace Midas.Data
                .Where(e => e.TickerId == tickerId)
                .ToList();
         }
+
+        public EOD GetEODByTickerIdAndDayId(int tickerId, int dayId)
+        {
+            return _ctx.EODs
+               .Where(e => (e.TickerId == tickerId) &&
+               (e.DayId == dayId))
+               .FirstOrDefault();
+        }
         // GENERAL - END
 
         // TIINGO - START

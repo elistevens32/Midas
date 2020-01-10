@@ -11,6 +11,9 @@ namespace Midas.Data
 
         public const bool testEnvironment = true;
 
+        public const int devMonthsBack = 24;
+        public const int prodMonthsBack = 60;
+
         public static bool getEnvironment()
         {
             if (testEnvironment == true)

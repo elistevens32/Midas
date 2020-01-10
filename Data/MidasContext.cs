@@ -20,7 +20,11 @@ namespace Midas
 
         public DbSet<Day> Days { get; set; }
         public DbSet<OptionCycleDate> OptionCycleDates { get; set; }
+        public DbSet<OptionCycleMonth> OptionCycleMonths { get; set; }
+        public DbSet<OptionCycleCloseMonth> OptionCycleCloseMonths { get; set; }
         public DbSet<Company> Companys { get; set; }
+
+        public DbSet<SystemSettings> Settings { get; set; }
 
         // NESTED OBJECTS
 

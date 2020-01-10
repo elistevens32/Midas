@@ -52,20 +52,26 @@ namespace Midas.Data.Entities
         [JsonProperty("volume")]
         public long Volume { get; set; }
 
-        [JsonProperty("adjClose")]
+        [JsonProperty("uClose")]
         public double AdjClose { get; set; }
 
-        [JsonProperty("adjHigh")]
+        [JsonProperty("uHigh")]
         public double AdjHigh { get; set; }
 
-        [JsonProperty("adjLow")]
+        [JsonProperty("uLow")]
         public double AdjLow { get; set; }
 
-        [JsonProperty("adjOpen")]
+        [JsonProperty("uOpen")]
         public double AdjOpen { get; set; }
 
-        [JsonProperty("adjVolume")]
+        [JsonProperty("uVolume")]
         public long AdjVolume { get; set; }
+
+        [JsonProperty("change")]
+        public double Change { get; set; }
+
+        [JsonProperty("changePercent")]
+        public double ChangePercent { get; set; }
 
         [JsonProperty("divCash")]
         public double DivCash { get; set; }

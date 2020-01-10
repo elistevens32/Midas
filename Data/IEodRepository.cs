@@ -11,7 +11,7 @@ namespace Midas.Data
     {
         // GENERAL
         List<EOD> GetEODsByTickerId(int tickerId);
-        List<EOD> GetEODByTickerIDAndDateRange(int tickerId, List<Day> dayList);
+        EOD GetEODByTickerIdAndDayId(int tickerId, int dayId);
 
         // TIINGO
         List<EOD> GetTiingoEODByTickerId(int tickerId);

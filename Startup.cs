@@ -65,10 +65,14 @@ namespace Midas
             // SEEDERS
             services.AddTransient<MidasSeeder>();
             services.AddTransient<TestDataSeeder>();
+            services.AddTransient<UpdateService>();
+            services.AddTransient<EODPopulateService>();
+            services.AddTransient<DownloadService>();
 
             // REPOSITORIES
             services.AddScoped<IMidasRepository, MidasRepository>();
             services.AddScoped<IDayRepository, DayRepository>();
+            services.AddScoped<IOptionCycleDateRepository, OptionCycleDateRepository>();
             services.AddScoped<ITickerRepository, TickerRepository>();
             services.AddScoped<IEodRepository, EodRepository>();
 

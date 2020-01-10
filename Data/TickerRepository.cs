@@ -48,6 +48,30 @@ namespace Midas.Data
                .ToList();
         }
 
+        public List<Ticker> GetAllStockTickers(int number)
+        {
+
+            if (number == 0)
+            {
+                return _ctx.Tickers
+                    .OrderBy(t => t.id)
+                    .Include(t => t.Company)
+                    .Where(t => (t.assetType == "Stock"))
+                    .ToList();
+            }
+            else
+            {
+                return _ctx.Tickers
+                    .OrderBy(t => t.id)
+                    .Include(t => t.Company)
+                    .Where(t => (t.assetType == "Stock"))
+                    .Take(number)
+                    .ToList();
+            }
+
+
+        }
+
         public Ticker GetTickerById(int id)
         {
             return _ctx.Tickers
