@@ -60,14 +60,18 @@ namespace Midas.Services
                 var seeder = scope.ServiceProvider.GetService<MidasSeeder>();
 
                 // TIINGO TICKER SEED
-                DownloadService.downloadSupportedTickerTiingo();
-                seeder.SeedTiingoTickers();
+                //DownloadService.downloadSupportedTickerTiingo();
+                //seeder.SeedTiingoTickers();
+
+                // SEED TICKERS
+                seeder.seedTickers("NASDAQ", "Data/Seed/tickers/nasdaq_tickers.csv");
+                seeder.seedTickers("NYSE", "Data/Seed/tickers/nyse_tickers.csv");
 
                 // SEED DAYS
                 seeder.SeedDays();
 
                 // SEED COMPANIES
-                seeder.SeedCompanies();
+                //seeder.SeedCompanies();
 
                 // SEED OPTIONS CYCLES OPEN MONTHS
                 seeder.SeedOptionCycleMonths();
@@ -90,6 +94,39 @@ namespace Midas.Services
                 // YAHOO - END OF DAY
                 //seeder.YahooGetPreviousDayEOD().Wait();
 
+            }
+        }
+
+        private void seedTickers(String exchange, String path)
+        {
+            var exchangeTickerList = _tickerRepo.GetTickersByExchange(exchange);
+
+            if (exchangeTickerList.Count == 0)
+            {
+                _ctx.Database.EnsureCreated();
+
+                var config = new CsvHelper.Configuration.Configuration
+                {
+                    HasHeaderRecord = true,
+                    HeaderValidated = null,
+                    MissingFieldFound = null,
+                    IgnoreBlankLines = false
+                };
+
+                TextReader reader = new StreamReader(path);
+                var csvReader = new CsvReader(reader, config);
+                var records = csvReader.GetRecords<Ticker>();
+
+                var tickerList = new List<Ticker>();
+
+                // SET TIINGO TO TRUE
+                foreach (var ticker in records)
+                {
+                    ticker.Exchange = exchange;
+                    tickerList.Add(ticker);
+                }
+                _ctx.Tickers.AddRange(tickerList);
+                _ctx.SaveChanges();
             }
         }
 
@@ -125,20 +162,19 @@ namespace Midas.Services
                             }
                             var company = JsonConvert.DeserializeObject<Company>(json, settings);
 
-                            if (ticker.TiingoBool == true)
-                            {
-                                company.tiingoTickerId = ticker.id;
-                            }
-                            else if (ticker.IexBool == true)
-                            {
-                                company.iexTickerId = ticker.id;
-                            }
-                            else if (ticker.YahooBool == true)
-                            {
-                                company.yahooTickerId = ticker.id;
-                            }
+                            //if (ticker.TiingoBool == true)
+                            //{
+                            //    company.tiingoTickerId = ticker.id;
+                            //}
+                            //else if (ticker.IexBool == true)
+                            //{
+                            //    company.iexTickerId = ticker.id;
+                            //}
+                            //else if (ticker.YahooBool == true)
+                            //{
+                            //    company.yahooTickerId = ticker.id;
+                            //}
 
-                            ticker.Company = company;
                             _ctx.SaveChanges();
                         }
                         catch (Exception ex)
@@ -189,9 +225,6 @@ namespace Midas.Services
                     }
                 }
             }
-
-
-
         }
 
         private void SeedOptionCycleCloseMonths()
@@ -255,9 +288,7 @@ namespace Midas.Services
 
             //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [Days]");
 
-            var daysBack = 0;
-
-            if (DevelopmentEnvironment.getEnvironment()) { daysBack = 380; } else { daysBack = 750; }
+            var daysBack = 800;
 
             var daysBackList = Day.DaysBack(daysBack);
             var daysForwardList = Day.DaysForward(daysBack);
@@ -283,7 +314,7 @@ namespace Midas.Services
             _ctx.Database.EnsureCreated();
 
             // TICKER LIST
-            var tickerList = _tickerRepo.GetTickersIex(10);
+            var tickerList = _tickerRepo.GetAllStockTickers(0);
 
             foreach (var ticker in tickerList)
             {
@@ -344,7 +375,7 @@ namespace Midas.Services
 
                     foreach (var ticker in tickerList)
                     {
-                        ticker.IexBool = true;
+                        //ticker.IexBool = true;
                         Console.WriteLine(" ");
                         _ctx.Tickers.Add(ticker);
                         _ctx.SaveChanges();
@@ -358,82 +389,9 @@ namespace Midas.Services
 
         }
 
-        
+
 
         // TIINGO - START
-        private void SeedTiingoEndOfDays(int daysBack)
-        {
-            _ctx.Database.EnsureCreated();
-
-            // DAYS LIST
-            var daysList = Day.DaysBack(180);
-
-            // TICKER LIST
-            var tickerList = _tickerRepo.GetTickersTiingo(10);
-
-            foreach (var ticker in tickerList)
-            {
-
-                foreach (var day in daysList)
-                {
-                    //var EodItem = _eodRepo.GetTiingoEODByTickerId(ticker.id, day.id);
-
-                    //if (EodItem == null)
-                    //{
-                    //    var formattedDate = String.Format("{0:yyyy-MM-dd}", day.Date);
-
-                    //    var requestString = $"{ApiTokens.tiingo_production}{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
-
-                    //    var downloadString = $"{ApiTokens.daily_endofday}{ticker.ticker}/prices?startDate={formattedDate}&endDate={formattedDate}&token={ApiTokens.tiingo_token}";
-
-                    //    try
-                    //    {
-                    //        using (WebClient webClient = new WebClient())
-                    //        {
-                    //            webClient.BaseAddress = ApiTokens.tiingo_production;
-                    //            var json = webClient.DownloadString(downloadString);
-                    //            var eodList = JsonConvert.DeserializeObject<List<EOD>>(json);
-
-                    //            if (eodList.Count == 0)
-                    //            {
-                    //                var emptyEod = new EOD();
-                    //                emptyEod.TiingoBool = true;
-                    //                emptyEod.TickerId = ticker.id;
-                    //                emptyEod.DayId = day.id;
-                    //                emptyEod.Open = 0.00;
-                    //                emptyEod.High = 0.00;
-                    //                emptyEod.Low = 0.00;
-                    //                emptyEod.Close = 0.00;
-                    //                emptyEod.Volume = 0;
-
-                    //                _ctx.EODs.Add(emptyEod);
-                    //                _ctx.SaveChanges();
-                    //            }
-                    //            else
-                    //            {
-                    //                foreach (var item in eodList)
-                    //                {
-                    //                    item.TickerId = ticker.id;
-                    //                    item.DayId = day.id;
-                    //                    item.TiingoBool = true;
-
-                    //                    _ctx.EODs.Add(item);
-                    //                    _ctx.SaveChanges();
-                    //                }
-                    //            }
-
-                    //        }
-                    //    }
-                    //    catch (WebException ex)
-                    //    {
-                    //        throw ex;
-                    //    }
-                    //}
-
-                }
-
-            }
-        }
 
         public void SeedTiingoTickers()
         {
@@ -461,7 +419,7 @@ namespace Midas.Services
                 // SET TIINGO TO TRUE
                 foreach (var ticker in records)
                 {
-                    ticker.TiingoBool = true;
+                    //ticker.TiingoBool = true;
                     updatedList.Add(ticker);
                 }
 

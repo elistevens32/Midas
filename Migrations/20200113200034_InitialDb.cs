@@ -130,30 +130,22 @@ namespace Midas.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
                     ticker = table.Column<string>(nullable: true),
-                    TiingoBool = table.Column<bool>(nullable: false),
-                    IexBool = table.Column<bool>(nullable: false),
-                    YahooBool = table.Column<bool>(nullable: false),
-                    exchange = table.Column<string>(nullable: true),
-                    assetType = table.Column<string>(nullable: true),
-                    priceCurrency = table.Column<string>(nullable: true),
-                    startDate = table.Column<string>(nullable: true),
-                    endDate = table.Column<string>(nullable: true),
-                    isEnabled = table.Column<bool>(nullable: false),
-                    Isin = table.Column<double>(nullable: false),
-                    type = table.Column<string>(nullable: true),
-                    industry = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Exchange = table.Column<string>(nullable: true),
+                    MarketCap = table.Column<string>(nullable: true),
+                    IPOyear = table.Column<string>(nullable: true),
+                    Sector = table.Column<string>(nullable: true),
+                    industry = table.Column<string>(nullable: true),
+                    SummaryQuote = table.Column<string>(nullable: true),
+                    volumeVerified = table.Column<bool>(nullable: false),
+                    eodVerified = table.Column<bool>(nullable: false),
+                    include = table.Column<bool>(nullable: false),
+                    newTicker = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tickers", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Tickers_Companys_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companys",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,15 +201,13 @@ namespace Midas.Migrations
                 name: "IX_EODs_TickerId",
                 table: "EODs",
                 column: "TickerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickers_CompanyId",
-                table: "Tickers",
-                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Companys");
+
             migrationBuilder.DropTable(
                 name: "EODs");
 
@@ -238,9 +228,6 @@ namespace Midas.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tickers");
-
-            migrationBuilder.DropTable(
-                name: "Companys");
         }
     }
 }

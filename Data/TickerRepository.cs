@@ -38,13 +38,48 @@ namespace Midas.Data
             }
         }
 
+        public List<Ticker> GetVolumeVerifiedTickers(int number)
+        {
+            if (number == 0)
+            {
+                return _ctx.Tickers
+                    .OrderBy(t => t.id)
+                    .Where(t => t.volumeVerified == true)
+                    .ToList();
+            }
+            else
+            {
+                return _ctx.Tickers
+                    .OrderBy(t => t.id)
+                    .Where(t => t.volumeVerified == true)
+                    .Take(number)
+                    .ToList();
+            }
+        }
+
         public List<Ticker> GetTestTickers(int number)
         {
             return _ctx.Tickers
                .OrderBy(t => t.id)
-               .Include(t => t.Company)
-               .Where(t => t.exchange == "NASDAQ")
+               .Where(t => t.Exchange == "NASDAQ")
                .Take(number)
+               .ToList();
+        }
+
+        public List<Ticker> GetTickersByExchange(String exchange)
+        {
+            return _ctx.Tickers
+               .OrderBy(t => t.id)
+               .Where(t => t.Exchange == exchange)
+               .Take(10)
+               .ToList();
+        }
+
+        public List<Ticker> GetAllEodTickers()
+        {
+            return _ctx.Tickers
+               .OrderBy(t => t.id)
+               .Where(t => t.eodVerified == true)
                .ToList();
         }
 
@@ -55,16 +90,12 @@ namespace Midas.Data
             {
                 return _ctx.Tickers
                     .OrderBy(t => t.id)
-                    .Include(t => t.Company)
-                    .Where(t => (t.assetType == "Stock"))
                     .ToList();
             }
             else
             {
                 return _ctx.Tickers
                     .OrderBy(t => t.id)
-                    .Include(t => t.Company)
-                    .Where(t => (t.assetType == "Stock"))
                     .Take(number)
                     .ToList();
             }
@@ -76,7 +107,6 @@ namespace Midas.Data
         {
             return _ctx.Tickers
                            .Where(t => t.id == id)
-                           .Include(t => t.Company)
                            .FirstOrDefault();
         }
 
@@ -84,42 +114,7 @@ namespace Midas.Data
         {
             return _ctx.Tickers
                            .Where(t => t.ticker == symbol)
-                           .Include(t => t.Company)
                            .FirstOrDefault();
         }
-
-        public List<Ticker> GetTickersIex(int number)
-        {
-            if (number == 0)
-            {
-                return _ctx.Tickers
-                           .Where(t => t.IexBool == true)
-                           .ToList();
-            }
-            else
-            {
-                return _ctx.Tickers
-                           .Where(t => t.IexBool == true)
-                           .Take(number)
-                           .ToList();
-            }
-        }
-        public List<Ticker> GetTickersTiingo(int number)
-        {
-            if (number == 0)
-            {
-                return _ctx.Tickers
-                           .Where(t => t.TiingoBool == true)
-                           .ToList();
-            }
-            else
-            {
-                return _ctx.Tickers
-                           .Where(t => t.TiingoBool == true)
-                           .Take(number)
-                           .ToList();
-            }
-        }
-
     }
 }

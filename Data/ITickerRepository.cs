@@ -11,11 +11,12 @@ namespace Midas.Data
     {
         // TICKER
         List<Ticker> GetAllTickers(int tickerCount);
+        List<Ticker> GetVolumeVerifiedTickers(int number);
         List<Ticker> GetAllStockTickers(int number);
         Ticker GetTickerBySymbol(String symbol);
         Ticker GetTickerById(int id);
-        List<Ticker> GetTickersTiingo(int number);
-        List<Ticker> GetTickersIex(int number);
         List<Ticker> GetTestTickers(int number);
+        List<Ticker> GetAllEodTickers();
+        List<Ticker> GetTickersByExchange(String exchange);
     }
 }

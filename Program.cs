@@ -20,10 +20,10 @@ namespace Midas
             if (DevelopmentEnvironment.testEnvironment == true)
             {
                 // SEEDING DATA
-                MidasSeeder.RunSeeding(host);
+                //MidasSeeder.RunSeeding(host);
 
                 // CHECK FOR UPDATES
-                UpdateService.CheckForUpdates(host);
+                //UpdateService.CheckForUpdates(host);
 
                 // TEST DATA
                 //TestDataSeeder.SeedTestData(host);
@@ -31,7 +31,7 @@ namespace Midas
             }
 
             // EOD POPULATE
-            EODPopulateService.RunEODPopulate(host);
+            //EODPopulateService.RunEODPopulate(host);
 
             host.Run();
         }

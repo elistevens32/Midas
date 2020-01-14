@@ -309,51 +309,43 @@ namespace Midas.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IexBool")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Isin")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("TiingoBool")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("YahooBool")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("assetType")
+                    b.Property<string>("Exchange")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("endDate")
+                    b.Property<string>("IPOyear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("exchange")
+                    b.Property<string>("MarketCap")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sector")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SummaryQuote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("eodVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("include")
+                        .HasColumnType("bit");
 
                     b.Property<string>("industry")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isEnabled")
+                    b.Property<bool>("newTicker")
                         .HasColumnType("bit");
-
-                    b.Property<string>("priceCurrency")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("startDate")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ticker")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("volumeVerified")
+                        .HasColumnType("bit");
 
                     b.HasKey("id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Tickers");
                 });
@@ -369,15 +361,6 @@ namespace Midas.Migrations
                     b.HasOne("Midas.Data.Entities.Ticker", "Ticker")
                         .WithMany()
                         .HasForeignKey("TickerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Midas.Data.Entities.Ticker", b =>
-                {
-                    b.HasOne("Midas.Data.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

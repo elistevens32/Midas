@@ -13,6 +13,8 @@ namespace Midas
         public const string iex_sandbox_domain = "https://sandbox.iexapis.com";
         public const string iex_historical_day_p1 = "/v1/stock/";
         public const string iex_historical_day_p2 = "/chart/date/";
+        public const string iex_historical_range_p1 = "/stable/stock/";
+        public const string iex_historical_range_p2 = "/chart/";
         public const string iex_ticker_list = "/stable/ref-data/iex/symbols?token=";
         public const string iex_company_p1 = "/stable/stock/";
         public const string iex_company_p2 = "/company?token=";

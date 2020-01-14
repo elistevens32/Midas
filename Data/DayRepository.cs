@@ -42,6 +42,14 @@ namespace Midas.Data
                 .ToList();
         }
 
+        public List<Day> GetAllDaysPastToday()
+        {
+            return _ctx.Days
+                .OrderBy(d => d.Date)
+                .Where(e => e.Date < DateTime.Today.Date)
+                .ToList();
+        }
+
         public List<Day> GetDaysByMonthAndYear(int month, int year)
         {
             return _ctx.Days

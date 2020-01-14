@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CsvHelper.Configuration.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,35 +18,26 @@ namespace Midas.Data.Entities
         public int id { get; set; }
         public int CompanyId { get; set; }
 
-        [ForeignKey("CompanyId")]
-        public Company Company { get; set; }
-        public DateTime Date { get; set; }
-
-        [JsonProperty("symbol")]
+        [Name("Symbol")]
         public string ticker { get; set; }
-        public bool TiingoBool { get; set; }
-        public bool IexBool { get; set; }
-        public bool YahooBool { get; set; }
-
-        // TIINGO
-        public string exchange { get; set; }
-        public string assetType { get; set; }
-        public string priceCurrency { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
-
-        // IEX
-        [JsonProperty("isEnabled")]
-        public bool isEnabled { get; set; }
-
-        // YAHOO
-        public double Isin { get; set; }
-        public string type { get; set; }
+        public string Name { get; set; }
+        public string Exchange { get; set; }
+        public string MarketCap { get; set; }
+        public string IPOyear { get; set; }
+        public string Sector { get; set; }
         public string industry { get; set; }
 
+        [Name("Summary Quote")]
+        public string SummaryQuote { get; set; }
 
-        // METHODS
-        public static List<string> ConvertListToSymbolString(IEnumerable<Ticker> listSymbols)
+        // BOOLEANS
+        public bool volumeVerified { get; set; }
+        public bool eodVerified { get; set; }
+        public bool include { get; set; }
+        public bool newTicker { get; set; }
+
+    // METHODS
+    public static List<string> ConvertListToSymbolString(IEnumerable<Ticker> listSymbols)
         {
             var stringList = new List<string>();
 
