@@ -165,31 +165,36 @@ namespace Midas.Services
             //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [EODs]");
 
             // TICKER LIST
-            var tickerList = _tickerRepo.GetAllTickers(0);
+            var tickerList = _tickerRepo.GetAllTickers(DevelopmentEnvironment.tickersCount);
 
             foreach (var ticker in tickerList)
             {
-                String domain = null;
-                String token = null;
+                var eodList = _eodRepo.GetEODsByTickerId(ticker.id);
 
-                if (DevelopmentEnvironment.testEnvironment == true)
+                if (eodList.Count < 200)
                 {
-                    #pragma warning disable CS0162 // Unreachable code detected
-                    domain = ApiTokens.iex_sandbox_domain;
-                    #pragma warning restore CS0162 // Unreachable code detected
-                    token = ApiTokens.test_iex_secret_token;
-                }
-                else
-                {
-                    domain = ApiTokens.iex_live_domain;
-                    token = ApiTokens.live_iex_public_token;
-                }
+                    String domain = null;
+                    String token = null;
 
-                var requestString = $"{domain}{ApiTokens.iex_historical_range_p1}{ticker.ticker}{ApiTokens.iex_historical_range_p2}2y?token={token}";
-                //Console.WriteLine("Request Check");
+                    if (DevelopmentEnvironment.testEnvironment == true)
+                    {
+                        #pragma warning disable CS0162 // Unreachable code detected
+                        domain = ApiTokens.iex_sandbox_domain;
+                        #pragma warning restore CS0162 // Unreachable code detected
+                        token = ApiTokens.test_iex_secret_token;
+                    }
+                    else
+                    {
+                        domain = ApiTokens.iex_live_domain;
+                        token = ApiTokens.live_iex_public_token;
+                    }
 
-                // WEB CLIENT CALL
-                iexWebClientCall(requestString, ticker);
+                    var requestString = $"{domain}{ApiTokens.iex_historical_range_p1}{ticker.ticker}{ApiTokens.iex_historical_range_p2}2y?token={token}";
+                    //Console.WriteLine("Request Check");
+
+                    // WEB CLIENT CALL
+                    iexWebClientCall(requestString, ticker);
+                }
             }
         }
 

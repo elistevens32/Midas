@@ -48,10 +48,26 @@ namespace Midas.Services
                 var UpdateService = scope.ServiceProvider.GetService<UpdateService>();
 
                 // CHECK TODAY
-                UpdateService.checkToday();
+                //UpdateService.checkToday();
+
+                // CORRECT COMPANIES
+                UpdateService.UpdateMissingCompanyIds();
 
                 //TODO - Check for Updates to the OptionCycleMonth (Does a new month need to be added)
 
+            }
+        }
+
+        private void UpdateMissingCompanyIds()
+        {
+            var companies = _repository.GetAllCompanies();
+
+            foreach (var company in companies)
+            {
+                var ticker = _tickerRepo.GetTickerById(company.iexTickerId);
+
+                ticker.CompanyId = company.id;
+                _ctx.SaveChanges();
             }
         }
 

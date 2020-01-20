@@ -10,18 +10,18 @@ namespace Midas.Data
     {
 
         public const bool testEnvironment = true;
-
         public const int devMonthsBack = 24;
         public const int prodMonthsBack = 60;
+        public const int tickersCount = 10;
 
         public static bool getEnvironment()
         {
-            if (testEnvironment == true)
+            if (testEnvironment == false)
             {
             #pragma warning disable CS0162 // Unreachable code detected
             return true;
             #pragma warning restore CS0162 // Unreachable code detected
-            }
+    }
             else 
             {
             #pragma warning disable CS0162 // Unreachable code detected

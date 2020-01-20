@@ -13,6 +13,7 @@ let DataService = class DataService {
     loadTickers() {
         return this.http.get("/api/tickers")
             .pipe(map((data) => {
+            console.log(data);
             this.tickers = data;
             return true;
         }));

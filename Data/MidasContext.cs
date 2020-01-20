@@ -23,6 +23,7 @@ namespace Midas
         public DbSet<OptionCycleMonth> OptionCycleMonths { get; set; }
         public DbSet<OptionCycleCloseMonth> OptionCycleCloseMonths { get; set; }
         public DbSet<Company> Companys { get; set; }
+        public DbSet<QualityScore> QualityScores { get; set; }
 
         public DbSet<SystemSettings> Settings { get; set; }
 

@@ -71,7 +71,7 @@ namespace Midas.Services
                 seeder.SeedDays();
 
                 // SEED COMPANIES
-                //seeder.SeedCompanies();
+                seeder.SeedCompanies();
 
                 // SEED OPTIONS CYCLES OPEN MONTHS
                 seeder.SeedOptionCycleMonths();
@@ -82,18 +82,32 @@ namespace Midas.Services
                 // SEED OPTIONS CYCLES
                 seeder.SeedOptionCycles();
 
-                // IEX TICKER SEED
-                //seeder.SeedIexTickers().Wait();
+                // SEED RANDOM QUALITY SCORES
+                seeder.SeedRandomQualityScores();
 
-                // TIINGO - END OF DAY
-                //seeder.SeedTiingoEndOfDays(5).Wait();
+            }
+        }
 
-                // IEX - END OF DAY
-                //seeder.SeedIexEndOfDays(5).Wait();
+        private void SeedRandomQualityScores()
+        {
+            //_ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [QualityScores]");
 
-                // YAHOO - END OF DAY
-                //seeder.YahooGetPreviousDayEOD().Wait();
+            _ctx.Database.EnsureCreated();
 
+            var tickerList = _tickerRepo.GetAllTickers(DevelopmentEnvironment.tickersCount);
+            var qualityScoreList = _repository.GetAllQualityScores(DevelopmentEnvironment.tickersCount);
+            var day = _dayRepository.GetDayByDate(DateTime.Today.Date);
+
+            if (tickerList.Any() && qualityScoreList.Count != DevelopmentEnvironment.tickersCount)
+            {
+                foreach (var ticker in tickerList)
+                {
+                    var qsObj = QualityScore.GetRandomQualityScoreValue(.5, 3, day, ticker);
+
+                    _ctx.QualityScores.Add(qsObj);
+                    _ctx.SaveChanges();
+
+                }
             }
         }
 
@@ -135,10 +149,10 @@ namespace Midas.Services
 
             _ctx.Database.EnsureCreated();
 
-            var tickerList = _tickerRepo.GetTestTickers(500);
-            var firstCompanyId = tickerList[0].CompanyId;
+            var tickerList = _tickerRepo.GetAllTickers(DevelopmentEnvironment.tickersCount);
+            var companysList = _repository.GetCompaniesThatAreGood();
 
-            if (tickerList.Any() && firstCompanyId == 0)
+            if (tickerList.Any() && companysList.Count < DevelopmentEnvironment.tickersCount)
             {
                 foreach (var ticker in tickerList)
                 {
@@ -160,21 +174,33 @@ namespace Midas.Services
                             {
                                 break;
                             }
-                            var company = JsonConvert.DeserializeObject<Company>(json, settings);
 
-                            //if (ticker.TiingoBool == true)
-                            //{
-                            //    company.tiingoTickerId = ticker.id;
-                            //}
-                            //else if (ticker.IexBool == true)
-                            //{
-                            //    company.iexTickerId = ticker.id;
-                            //}
-                            //else if (ticker.YahooBool == true)
-                            //{
-                            //    company.yahooTickerId = ticker.id;
-                            //}
+                            var jsonCompany = JsonConvert.DeserializeObject<Company>(json, settings);
+                            var company = _repository.GetCompanyBySymbol(ticker.ticker);
+                            company.CompanyName = jsonCompany.CompanyName;
+                            company.Exchange = jsonCompany.Exchange;
+                            company.Industry = jsonCompany.Industry;
+                            company.Website = jsonCompany.Website;
+                            company.Description = jsonCompany.Description;
+                            company.Ceo = jsonCompany.Ceo;
+                            company.SecurityName = jsonCompany.SecurityName;
+                            company.IssueType = jsonCompany.IssueType;
+                            company.Sector = jsonCompany.Sector;
+                            company.PrimarySicCode = jsonCompany.PrimarySicCode;
+                            company.Employees = jsonCompany.Employees;
+                            company.Address = jsonCompany.Address;
+                            company.Address2 = jsonCompany.Address2;
+                            company.State = jsonCompany.State;
+                            company.City = jsonCompany.Zip;
+                            company.Country = jsonCompany.Country;
+                            company.Phone = jsonCompany.Phone;
 
+                            //company = jsonCompany;
+
+                            company.iexTickerId = ticker.id;
+                            ticker.CompanyId = company.id;
+
+                            _ctx.Companys.Update(company);
                             _ctx.SaveChanges();
                         }
                         catch (Exception ex)

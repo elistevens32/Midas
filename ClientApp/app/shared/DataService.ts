@@ -17,6 +17,7 @@ export class DataService {
         return this.http.get("/api/tickers")
             .pipe(
                 map((data: any[]) => {
+                    console.log(data);
                     this.tickers = data;
                     return true;
                 }));

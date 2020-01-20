@@ -1,4 +1,5 @@
-﻿using Midas.Data.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using Midas.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Midas.Data
     {
         // TICKER
         List<Ticker> GetAllTickers(int tickerCount);
+        List<Ticker> GetTickersAndQSByDate(int tickerCount, DateTime date);
         List<Ticker> GetVolumeVerifiedTickers(int number);
         List<Ticker> GetAllStockTickers(int number);
         Ticker GetTickerBySymbol(String symbol);

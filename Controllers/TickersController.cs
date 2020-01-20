@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Midas.Data;
 using Midas.Data.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Midas.Controllers
 {
@@ -19,17 +21,18 @@ namespace Midas.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Ticker>> Get()
+        public ActionResult<List<Ticker>> Get()
         {
             try
             {
-                return repository.GetTestTickers(50);
+                var listTicker = repository.GetTickersAndQSByDate(DevelopmentEnvironment.tickersCount, DateTime.Today.Date);
+                return listTicker;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
 
                 logger.LogError($"Failed to get tickers: {ex}");
-                return BadRequest("Failed to get tickers");
+                return BadRequest($"Failed to get tickers |  {ex}");
             }
         }
 

@@ -1,108 +1,31 @@
-<mat-card class="example-card">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>NASDAQ Overview</mat-card-title>
-        <!--<mat-card-subtitle>Test</mat-card-subtitle>-->
-    </mat-card-header>
+<mat-card class="stock-list">
+
+    <h2 class="text-lg-center"><fa-icon [icon]="faList"></fa-icon> Ticker List</h2>
+    <br/>
     <mat-card-content>
         <div class="table-responsive">
             <table class="table table-hover table-striped table-sm">
                 <thead>
                     <tr>
-                        <th>Quality Score</th>
-                        <th>Name</th>
-                        <th>Symbol</th>
+                        <th>QS</th>
+                        <th>Ticker</th>
+                        <th>Company</th>
+                        <th>Exchange</th>
+
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
+                    <tr *ngFor="let t of tickers">
+                        <td><span class="badge badge-success">1.25</span></td>
+                        <td><a href="dashboard/ticker/{{t.id}}">{{t.ticker}}</a></td>
+                        <td><a href="dashboard/ticker/{{t.id}}">{{t.company.companyName}}</a></td>
+                        <td>{{t.exchange}}</td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
     </mat-card-content>
+
 </mat-card>

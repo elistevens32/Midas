@@ -1,68 +1,9 @@
-﻿<mat-card class="example-card">
-    <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Watch List</mat-card-title>
-        <!--<mat-card-subtitle>Test</mat-card-subtitle>-->
-    </mat-card-header>
+﻿<mat-card class="watch-list">
+    <h2 class="text-lg-center"><fa-icon style="color: orange;" [icon]="faStar"></fa-icon> Watch List</h2>
+    <hr />
     <mat-card-content>
-        <div class="table-responsive">
-            <table class="table table-hover table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Quality Score</th>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-                    <tr>
-                        <td><mat-icon class="fav-star">star</mat-icon></td>
-                        <td><span class="badge badge-success">1.82</span></td>
-                        <td><a class="font-weight-bold" href="stock">Apple Inc.</a></td>
-                        <td>AAPL</td>
-                    </tr>
-
-
-
-                </tbody>
-            </table>
-        </div>
+        <br />
+        <h5 class="text-center"><fa-icon style="color: red;" [icon]="faTimesCircle"></fa-icon> No Watched Items</h5>
+        <br />
     </mat-card-content>
 </mat-card>

@@ -281,6 +281,31 @@ namespace Midas.Migrations
                     b.ToTable("OptionCycleMonths");
                 });
 
+            modelBuilder.Entity("Midas.Data.Entities.QualityScore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TickerId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DayId");
+
+                    b.HasIndex("TickerId");
+
+                    b.ToTable("QualityScores");
+                });
+
             modelBuilder.Entity("Midas.Data.Entities.SystemSettings", b =>
                 {
                     b.Property<int>("id")
@@ -347,6 +372,8 @@ namespace Midas.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("CompanyId");
+
                     b.ToTable("Tickers");
                 });
 
@@ -361,6 +388,30 @@ namespace Midas.Migrations
                     b.HasOne("Midas.Data.Entities.Ticker", "Ticker")
                         .WithMany()
                         .HasForeignKey("TickerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Midas.Data.Entities.QualityScore", b =>
+                {
+                    b.HasOne("Midas.Data.Entities.Day", "Day")
+                        .WithMany()
+                        .HasForeignKey("DayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Midas.Data.Entities.Ticker", "Ticker")
+                        .WithMany()
+                        .HasForeignKey("TickerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Midas.Data.Entities.Ticker", b =>
+                {
+                    b.HasOne("Midas.Data.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

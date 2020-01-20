@@ -34,6 +34,20 @@ namespace Midas
                .ToList();
         }
 
+        public Company GetCompanyByTickerId(int tickerId)
+        {
+            return _ctx.Companys
+                .Where(c => c.iexTickerId == tickerId)
+                .FirstOrDefault();
+        }
+
+        public Company GetCompanyBySymbol(string ticker)
+        {
+            return _ctx.Companys
+                .Where(c => c.Symbol == ticker)
+                .FirstOrDefault();
+        }
+
         public List<Company> GetAllCompanies()
         {
             return _ctx.Companys
@@ -57,40 +71,13 @@ namespace Midas
 
         }
 
-
-
-        //public IEnumerable<Order> GetAllOrdersByUser(string username, bool includeItems)
-        //{
-        //    if (includeItems)
-        //    {
-
-        //        return _ctx.Orders
-        //                   .Where(o => o.User.UserName == username)
-        //                   .Include(o => o.Items)
-        //                   .ThenInclude(i => i.Product)
-        //                   .ToList();
-
-        //    }
-        //    else
-        //    {
-        //        return _ctx.Orders
-        //                   .Where(o => o.User.UserName == username)
-        //                   .ToList();
-        //    }
-        //}
-
-        //public Order GetOrderById(string username, int id)
-        //{
-        //    return _ctx.Orders
-        //               .Include(o => o.Items)
-        //               .ThenInclude(i => i.Product)
-        //               .Where(o => o.Id == id && o.User.UserName == username)
-        //               .FirstOrDefault();
-        //}
-
-        public bool SaveAll()
+        // QUALITY SCORES
+        public List<QualityScore> GetAllQualityScores(int number)
         {
-            return _ctx.SaveChanges() > 0;
+            return _ctx.QualityScores
+               .OrderBy(q => q.Id)
+               .Take(number)
+               .ToList();
         }
     }
 }

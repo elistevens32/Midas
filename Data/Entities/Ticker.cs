@@ -16,7 +16,12 @@ namespace Midas.Data.Entities
         // GENERAL
         [Key]
         public int id { get; set; }
+
+        [ForeignKey("Company")]
         public int CompanyId { get; set; }
+        public Company Company { get; set; }
+
+        public QualityScore QualityScore { get; set; }
 
         [Name("Symbol")]
         public string ticker { get; set; }

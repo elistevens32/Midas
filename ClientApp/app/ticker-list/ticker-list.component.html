@@ -8,29 +8,24 @@
         </div>
 
         <time-export></time-export>
-        <br/>
+        <br />
         <div class="table-responsive">
             <table class="table table-hover table-striped table-sm">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>QS</th>
                         <th>Ticker</th>
-                        <th>Price Currency</th>
+                        <th>Company</th>
                         <th>Exchange</th>
 
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
-                        <td>53541</td>
-                        <td><a href="dashboard/ticker/53541"><span class="badge badge-success">AAPL</span></a></td>
-                        <td>USD</td>
-                        <td>NASDAQ</td>
-                    </tr>
-                    <tr *ngFor="let t of tickers" >
-                        <td>{{t.id}}</td>
-                        <td><a href="dashboard/ticker/{{t.id}}"><span class="badge badge-success">{{t.ticker}}</span></a></td>
-                        <td>{{t.priceCurrency}}</td>
+                    <tr *ngFor="let t of tickers">
+                        <td><span class="badge badge-success">1.25</span></td>
+                        <td><a href="dashboard/ticker/{{t.id}}">{{t.ticker}}</a></td>
+                        <td><a href="dashboard/ticker/{{t.id}}">{{t.company.companyName}}</a></td>
                         <td>{{t.exchange}}</td>
                     </tr>
 

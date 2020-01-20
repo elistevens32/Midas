@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Midas.Data.DTO;
 using Midas.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -27,15 +29,31 @@ namespace Midas.Data
             {
                 return _ctx.Tickers
                     .Where(t => t.ticker != null)
+                    .Include(t => t.Company)
                     .ToList();
             }
             else
             {
                 return _ctx.Tickers
                     .Where(t => t.ticker != null)
+                    .Include(t => t.Company)
                     .Take(tickerCount)
                     .ToList();
             }
+        }
+
+        public List<Ticker> GetTickersAndQSByDate(int tickerCount, DateTime date)
+        {
+            var query = (from ticker in _ctx.Tickers
+                         join qs in _ctx.QualityScores on ticker.id equals qs.TickerId
+                         join d in _ctx.Days on qs.DayId equals d.id
+                         //where ticker.volumeVerified == true
+                         select ticker)
+                         .Include(t => t.Company)
+                         .Take(tickerCount)
+                         .ToList();
+            return query;
+
         }
 
         public List<Ticker> GetVolumeVerifiedTickers(int number)
@@ -44,16 +62,18 @@ namespace Midas.Data
             {
                 return _ctx.Tickers
                     .OrderBy(t => t.id)
+                    .Include(t => t.Company)
                     .Where(t => t.volumeVerified == true)
                     .ToList();
             }
             else
             {
                 return _ctx.Tickers
-                    .OrderBy(t => t.id)
-                    .Where(t => t.volumeVerified == true)
-                    .Take(number)
-                    .ToList();
+                   .OrderBy(t => t.id)
+                   .Include(t => t.Company)
+                   .Where(t => t.volumeVerified == true)
+                   .Take(number)
+                   .ToList();
             }
         }
 
@@ -106,15 +126,17 @@ namespace Midas.Data
         public Ticker GetTickerById(int id)
         {
             return _ctx.Tickers
-                           .Where(t => t.id == id)
-                           .FirstOrDefault();
+                .Where(t => t.id == id)
+                .Include(t => t.Company)
+                .FirstOrDefault();
         }
 
         public Ticker GetTickerBySymbol(String symbol)
         {
             return _ctx.Tickers
-                           .Where(t => t.ticker == symbol)
-                           .FirstOrDefault();
+                .Where(t => t.ticker == symbol)
+                .FirstOrDefault();
         }
+
     }
 }
